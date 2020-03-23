@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
-During a 25+ year career in business analysis and planning, I found it helpful to think of markets as latent sales transactions. This perspective kept the focus on results - and it extends throughout the entire value chain. Really, Business activity is either prior transactions, likely transactions, or posterior projections of transactions. And transaction dimensions often include, or point to, significant business drivers *(a good place to start, anyway)*. The goal is to produce relevant, **actionable** models. 
+As a business analyst, I found it helpful to think of markets as latent sales transactions. This perspective keeps the focus on results - and it extends throughout the entire value chain. Really, Business activity is either prior transactions, likely transactions, or posterior projections of transactions. And transaction dimensions often include, or point to, significant business drivers *(a good place to start, anyway)*. The goal is to produce relevant, **actionable** models. 
 
 Bayesian modeling is a core competency in analysis and planning, especially where **risk management and assurance** are important. Initially adopted in Insurance, Pharmaceuticals, and Banking *(esp. Trading)*, it is rapidly expanding across industries and into wider application space *(one interesting twist is the use of Bayesian modeling in testing and assurance of AI project deliverables where the parameters are noninterpretable and the probability of any specific outcome is unknown)*. The probabilistic output of Bayesian modeling is an important tool in an uncertain world.
 
