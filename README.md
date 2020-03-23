@@ -1,67 +1,71 @@
 Introduction
 ------------
 
-Bayesian modeling is a core competency where **risk management and
-assurance** is a major goal of planning and analysis. Initially adopted
-in Insurance, Pharmaceuticals, and Banking *(esp. Trading)*, Bayesian
-modeling is expanding across industries to a broad range of applications
-where analysis is material enough to require a probablistic basis. One
-emerging and interesting application that is assurance in AI and ML
-projects *(where establishing outcome probability is a challenge)*
+During a 25+ year career in business analysis and planning, I found it
+helpful to think of markets as latent sales transactions. This
+perspective kept the focus on results - and it extends throughout the
+entire value chain. Really, Business activity is either prior
+transactions, likely transactions, or posterior projections of
+transactions. And transaction dimensions often include, or point to,
+significant business drivers *(a good place to start, anyway)*. The goal
+is to produce relevant, **actionable** models.
 
-Initially, adoption faced challenges:
+Bayesian modeling is a core competency in analysis and planning,
+especially where **risk management and assurance** are important.
+Initially adopted in Insurance, Pharmaceuticals, and Banking
+*(esp. Trading)*, and is rapidly expanding across industries and into
+wider application space *(one interesting twist is the use of Bayesian
+modeling in testing and assurance of AI project deliverables where the
+parameters are noninterpretable and the probability of any specific
+outcome is unknown)*. The probabilistic output of Bayesian modeling is a
+key feature in an uncertain world.
+
+There has been challenges to adoption:
 
 -   It’s computationaly intensive. Bayesian analysis relies on a
-    sampling approach that can be slow (a real challenge in **business
-    transaction** space). But like AI, high-performance computing has
-    mitigated this barrier, and the challenges that remain can be
-    addressed through model **“Design for Optimization”**.
+    sampling approach that can be a challenge in the transaction space
+    *(where data can be very high in volume and dynamics)*. But like AI,
+    high-performance computing has mitigated this barrier, and many of
+    the challenges that remain can be addressed through model design
+    *(we will cover “design for optimization”)*.
 
 -   There’s a learning curve. Bayesian analysis is not building
-    pie-charts in dashboards - it requires application of advanced
-    mathematics *(including calculus and linear algebra, which will be
-    introduced and leveraged during our study)*.
+    pie-charts in dashboards - it requires quantitative aptitude and
+    commitment.
 
-In spite of these challenges, Bayesian analysis provides **unique**
-benefits:
+But it’s worth it - Bayesian analysis provides **substantial and
+unique** benefits in business modeling:
 
--   **Integration of Experience and Intuition.** Analysis dimensions are
-    often significant, but ambiguous; and quantitative methods don’t
-    always comprehend the full problem space. Human experience and
-    judgment, in all it’s glorious fallabily, is often the best evidence
-    we have. Bayesian analysis integrates experience *(however
-    ambiguous)* with evidence using a statistically valid approach, and
-    produces balanced analysis.
+-   **Integration of Experience and Evidence.** Opinions of experienced
+    managers *(even the messy, ambiguous, intuitive ones)*, can be
+    captured and combined with data in a formal, statistically valid
+    process to produce models that are both intuitive and quantitative.
 
 -   **Interpretable, Probabilistic Results.** Bayesian analysis produces
-    projections and parameters with probabilities and credible
-    intervals, directly addressing assurance and risk management. This
-    also provides quantitative explanations of the relationships between
-    our projections and independent variables and business drivers. A
-    little algebra gives us quantitative answers to the impact of
-    changes to these drivers *(something that AI and ML doesn’t
-    provide)*.
+    projections and parameters with probabilities. This directly
+    addresses the risk management aspects of business transactions *(a
+    no-brainer in banking and trading, but way underemphasized in many
+    application spaces)*. This also quantifies relationships between
+    drivers and results, which is essential to business analysis.
 
 -   **Multilevel Analysis with Effects.** Business transaction
     environments are almost always multilevel *(e.g., Business Units
-    =&gt; Regions =&gt; Projects =&gt; Customers)*. It’s not safe to
-    assume that transacation activity will behave the same across all
-    these levels - they often share some effects, but others are more
-    related to the level. Effects are basic to Bayesian analysis, and
-    this provides answers to questions like the impact of migrating
-    products or projects across regions or customer groups, including
-    those that don’t exist yet *(the very essence of planning and
-    analysis)*.
+    =&gt; Regions =&gt; Projects =&gt; Customers)* and it’s not safe to
+    assume that transaction activity will behave the same across all
+    these levels - this misconception even has it’s own name: “Simpsons
+    paradox”. *(It’s not named after Homer, but eerily appropriate)*.
 
--   **Granular Control over Design and Tuning.** Bayesian models can be
-    tuned *(and generalized)* across levels down to specific parameters.
-    Depending on the application, this can make a huge difference in
-    accuracy and credibily *(like with projections over spaces with no
-    data)*
+-   **Granular Control over Model Design and Tuning.** Models can be
+    tuned *(and generalized)* across levels down to specific
+    parameters.This can make a huge difference in accuracy, adaptability
+    and credibilty.
 
 -   **Bayeisan Updating**. Bayesian models have a unique structure that
-    can shift the current model to a prior model to integrate new data
-    quickly *(without retraining)*. The models can also transfer
-    parameters between models *(which is very difficult in ML
-    applications)*. This capablity is very powerful in dynamic data
+    can quickly integrate new data, and transfer explanatory parameters
+    between models *(circumventing the model retraining problem in
+    machine learning)*. This enables adaptation in dynamic transaction
     environments.
+
+*(Technical discussion continued in:
+<a href="https://github.com/ellenwterry/Introduction/blob/master/Introduction%20to%20Bayesian%20Transaction%20Analysis.Rmd" class="uri">https://github.com/ellenwterry/Introduction/blob/master/Introduction%20to%20Bayesian%20Transaction%20Analysis.Rmd</a>
+)*
