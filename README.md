@@ -10,13 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
-As a business analyst, I found it helpful to think of markets as latent sales transactions. This perspective keeps the focus on results - and it extends throughout the entire value chain. Really, Business activity is either prior transactions, likely transactions, or posterior projections of transactions. And transaction dimensions often include, or point to, significant business drivers *(a good place to start, anyway)*. The goal is to produce relevant, **actionable** models. 
+As a business analyst, I find it helpful to think of markets as latent sales transactions. This perspective keeps the focus on results, and extends throughout the entire value chain. Really, Business activity can be cast as prior transactions, likely transactions, or posterior projections of transactions. Business system transactions have data integrity enforced, and their dimensions often include, or point to, significant business drivers. So, even though transactions can be high in volume and dynamics, it's still a good palce to start if the goal is to produce models that are relevant and **actionable**. 
 
 Bayesian modeling is a core competency in analysis and planning, especially where **risk management and assurance** are important. Initially adopted in Insurance, Pharmaceuticals, and Banking *(esp. Trading)*, it is rapidly expanding across industries and into wider application space *(one interesting twist is the use of Bayesian modeling in testing and assurance of AI project deliverables where the parameters are noninterpretable and the probability of any specific outcome is unknown)*. The probabilistic output of Bayesian modeling is an important tool in an uncertain world.
 
 There has been challenges to adoption:  
 
-* It's computationaly intensive. Bayesian analysis relies on a sampling approach that can be a challenge in the transaction space *(where data can be very high in volume and dynamics)*. But like AI, high-performance computing has mitigated this barrier, and many of the challenges that remain can be addressed through model design *(we will cover "design for optimization")*.  
+* It's computationally intensive. Bayesian analysis relies on a sampling approach that can be a challenge in the transaction space *(where data can be very high in volume and dynamics)*. But like AI, high-performance computing has mitigated this barrier, and many of the challenges that remain can be addressed through model design *(we will cover "design for optimization")*.  
 
 * There's a learning curve. Bayesian analysis is not building pie-charts in dashboards - it requires quantitative aptitude and commitment.  
 
@@ -33,4 +33,3 @@ But it's worth it - Bayesian analysis provides **substantial and unique** benefi
 * **Bayeisan Updating**. Bayesian models have a unique structure that can quickly integrate new data, and transfer explanatory parameters between models *(circumventing the model retraining problem in machine learning)*. This enables adaptation in dynamic transaction environments. 
 
 *(Technical discussion continued in: https://github.com/ellenwterry/Introduction/blob/master/Introduction%20to%20Bayesian%20Transaction%20Analysis.Rmd )*
-
