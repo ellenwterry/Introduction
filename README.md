@@ -18,7 +18,7 @@ There have been challenges to adoption:
 
 Still, rapid adoption has proceeded because Bayesian analysis provides **substantial and unique** benefits in business modeling:  
 
-* **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data*(maybe weak in reliability, but strong in relevance)*. These can captured and merged with other data *(e.g., transactions)* in a formal, statistically valid process to produce models that balance the intuitive with the quantitative.  
+* **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data *(maybe weak in reliability, but strong in relevance)*. These can captured and merged with other data *(e.g., transactions)* in a formal, statistically valid process to produce models that balance the intuitive with the quantitative.  
 
 * **Interpretable, Probabilistic Results.** Bayesian analysis produces projections and parameters with probabilities that people can understand. It can answer the questions central to business analysis, like: *"how much of which resources do we need to achieve results, and what's the probability of it happening?"* Machine learning *(ML)* and Artificial Intelligence *(AI)* can't do this. This directly addresses the risk management components of planning and process *(a no-brainer in banking and trading, but seriously under-emphasized in other industries)*.   
 
