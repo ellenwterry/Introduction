@@ -16,11 +16,11 @@ There have been challenges to adoption:
 
 * There's a learning curve. Bayesian analysis is not building pie-charts in dashboards - it requires quantitative aptitude, and a commitment to understanding.   
 
-It's worth the commitment. Bayesian analysis provides **substantial and unique** benefits in business modeling:  
+Still, adoption proceeded because Bayesian analysis provides **substantial and unique** benefits in business modeling:  
 
-* **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data. These can captured and combined with other data *(e.g., transactions)* in a formal, statistically valid process to produce models balance the intuitive and the quantitative.  
+* **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data*(maybe weak in reliability, but strong in relevance)*. These can captured and merged with other data *(e.g., transactions)* in a formal, statistically valid process to produce models that balance the intuitive with the quantitative.  
 
-* **Interpretable, Probabilistic Results.** Bayesian analysis produces projections and parameters with probabilities that people can understand. It can answer the questions central to business analysis, like: *"how much of which resources do we need to achieve the results, and what's the probability of this happening?"* Machine learning *(ML)* and Artificial Intelligence *(AI)* can't do this. This directly addresses risk management and assurance *(a no-brainer in banking and trading, and under-emphasized in other industries)*.   
+* **Interpretable, Probabilistic Results.** Bayesian analysis produces projections and parameters with probabilities that people can understand. It can answer the questions central to business analysis, like: *"how much of which resources do we need to achieve results, and what's the probability of it happening?"* Machine learning *(ML)* and Artificial Intelligence *(AI)* can't do this. This directly addresses the risk management components of planning and process *(a no-brainer in banking and trading, but seriously under-emphasized in other industries)*.   
 
 * **Multilevel Analysis with Effects.** Business transaction environments are almost always multilevel *(e.g., Business Units => Regions => Projects => Customers)* and  it's not safe to assume that transaction activity will behave the same across all these levels *(data warehouses and dashboards are usually designed for "drill-down", but this doesn't provide quantitative, marginal, multilevel effects, which are pure gold in projection. A very powerful tool)*  
 
@@ -30,6 +30,6 @@ It's worth the commitment. Bayesian analysis provides **substantial and unique**
 
 Hopefully, these benefits motivate you to invest some time in learning Bayesian Analysis. It has served me well, and not just the planning processes *(planning orders, pricing policy, supply chain agreements, and industry trends)*, but operational *(pricing products, assets and derivatives)* and assurance processes *(project deliverables quality testing, controls testing and reasonableness of financial assertions)*. I think it's a core competency for Analysts, and well worth the commitment. 
 
-*(Intro Technical Notes continued in: https://github.com/ellenwterry/Introduction/blob/master/Introduction%20to%20Bayesian%20Transaction%20Analysis.Rmd )*
+*(Intro Technical Notes continued in: https://github.com/ellenwterry/Introduction/)*
 
 ------

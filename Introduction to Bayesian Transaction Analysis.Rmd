@@ -17,11 +17,11 @@ There have been challenges to adoption:
 
 * There's a learning curve. Bayesian analysis is not building pie-charts in dashboards - it requires quantitative aptitude, and a commitment to understanding.   
 
-It's worth the commitment. Bayesian analysis provides **substantial and unique** benefits in business modeling:  
+Still, adoption proceeded because Bayesian analysis provides **substantial and unique** benefits in business modeling:  
 
-* **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data. These can captured and combined with other data *(e.g., transactions)* in a formal, statistically valid process to produce models balance the intuitive and the quantitative.  
+* **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data*(maybe weak in reliability, but strong in relevance)*. These can captured and merged with other data *(e.g., transactions)* in a formal, statistically valid process to produce models that balance the intuitive with the quantitative.  
 
-* **Interpretable, Probabilistic Results.** Bayesian analysis produces projections and parameters with probabilities that people can understand. It can answer the questions central to business analysis, like: *"how much of which resources do we need to achieve the results, and what's the probability of this happening?"* Machine learning *(ML)* and Artificial Intelligence *(AI)* can't do this. This directly addresses risk management and assurance *(a no-brainer in banking and trading, and under-emphasized in other industries)*.   
+* **Interpretable, Probabilistic Results.** Bayesian analysis produces projections and parameters with probabilities that people can understand. It can answer the questions central to business analysis, like: *"how much of which resources do we need to achieve results, and what's the probability of it happening?"* Machine learning *(ML)* and Artificial Intelligence *(AI)* can't do this. This directly addresses the risk management components of planning and process *(a no-brainer in banking and trading, but seriously under-emphasized in other industries)*.   
 
 * **Multilevel Analysis with Effects.** Business transaction environments are almost always multilevel *(e.g., Business Units => Regions => Projects => Customers)* and  it's not safe to assume that transaction activity will behave the same across all these levels *(data warehouses and dashboards are usually designed for "drill-down", but this doesn't provide quantitative, marginal, multilevel effects, which are pure gold in projection. A very powerful tool)*  
 
@@ -31,14 +31,14 @@ It's worth the commitment. Bayesian analysis provides **substantial and unique**
 
 Hopefully, these benefits motivate you to invest some time in learning Bayesian Analysis. It has served me well, and not just the planning processes *(planning orders, pricing policy, supply chain agreements, and industry trends)*, but operational *(pricing products, assets and derivatives)* and assurance processes *(project deliverables quality testing, controls testing and reasonableness of financial assertions)*. I think it's a core competency for Analysts, and well worth the commitment. 
 
-*(Intro Technical Notes continued in: https://github.com/ellenwterry/Introduction/blob/master/Introduction%20to%20Bayesian%20Transaction%20Analysis.Rmd )*
+*(Intro Technical Notes continued in: https://github.com/ellenwterry/Introduction/)*
 
 ------
 
 ## Intro Technical Notes 
 ### Foundations for Bayesian Analysis
 
-This document provides an introduction *(or review, depending on prereqs)* to the concepts and skills foundational for Bayesian Analysis. There are two major sections: **Understanding Conditional Proability** and **Foundations for Optimization**:
+This document provides an introduction *(or review, depending on prereqs)* to the concepts and skills foundational for Bayesian Analysis. There are two major sections: **Understanding Conditional Probability** and **Foundations for Optimization**:
 
 ## Understanding Conditional Probability
 ```{r, comment=NA, message=F, warning=F, fig.width=4, fig.height=3, fig.align="center"}
@@ -46,11 +46,11 @@ library(kableExtra)
 library(stats)
 ```
 
-Before getting into Conditional Prbability, let's levelset on a few assumptions about regression:
+Before getting into Conditional Probability, let's level-set on a few assumptions about regression:
 
 * Regression assumes a relationship between dependent and independent variables with a wide range of distributions. 
 
-* Indepedent variables ($x$) can be any distribution, but the residuals $(y - \hat{y})$ should be normally distributed **after the model has been applied (e.g., $a+bx$ in a simple linear case)**. That said, dependent variables ($y$) in transaction environments are seldom normally distributed. But there are approaches for transforming variables, and designing models *(either in the equation or model distributions)*, that can address a wide range of distributions. So, this should not be a problem and it's **not** OK to *assume the data are normally distrbuted based on the Central Limit Theorem*. See Endnote$^1$. 
+* Independent variables ($x$) can be any distribution, but the residuals $(y - \hat{y})$ should be normally distributed **after the model has been applied (e.g., $a+bx$ in a simple linear case)**. That said, dependent variables ($y$) in transaction environments are seldom normally distributed. But there are approaches for transforming variables, and designing models *(either in the equation or model distributions)*, that can address a wide range of distributions. So, this should not be a problem and it's **not** OK to *assume the data are normally distributed based on the Central Limit Theorem*. See EndNote$^1$. 
 
 * There is also an assumption about homoscedasticity *(or homogeneity of variance)*, which relates to the distribution of $y$. 
 
@@ -100,7 +100,7 @@ sigmaY = round(sd(ExampleData1$y),1)
 ```
 OK, in the plot above, we can see $y$ *(lets call it Sales in M's to keep it real)* and $x$ *(let's call it Advertising in K's)*, with a linear relationship determining the **mean** of $y$, defined by $b_0 +b_1 x$ for each value of $x$. So, the model is **parameterized** with two coefficients ($b_0,b_1$). The overall distributions of $x$ and $y$ are shown on the margins *(keep in mind that values can repeat, so one point could include many observations - therefore, the points and histograms may not appear to match up - but they do)*.  
 
-Knowing the **mean** for a specific value of $x$ is a good start, and we can get the variance of the distribution of $y$ from the standard error. But what if we want to know the *probability* for a range of $y$, given a specfic value for $x$? For example: What's the probability that sales = 5M, given the advertising budget = 3k? *(do you think a business manager might ask this type of question?)*. This is a conditional  probability, and can be written, generally, as a joint occurance of random variables, or **joint probability density function**, which *(in continuous case)* can be defined as: 
+Knowing the **mean** for a specific value of $x$ is a good start, and we can get the variance of the distribution of $y$ from the standard error. But what if we want to know the *probability* for a range of $y$, given a specific value for $x$? For example: What's the probability that sales = 5M, given the advertising budget = 3k? *(do you think a business manager might ask this type of question?)*. This is a conditional  probability, and can be written, generally, as a joint occurrence of random variables, or **joint probability density function**, which *(in continuous case)* can be defined as: 
 
 $P(y_1 \leq y \leq y_2, x_1 \leq x \leq x_2) = \int_{y_1}^{y_2} \int_{x_1}^{x_2} p(x,y) \,dx\,dy$ 
 
@@ -273,38 +273,38 @@ pp2 <- ggplot(dfData) +
 plot_grid(p1, PF, pp1, pp2, rows = 2, cols = 2)
 
 ```
-This is a fairly complete picture for conditional analysis, and a good start on understanding Bayesian analysis. For now, let's set this aside and look some skills we'll need for model optimization *(which is a big deal in the transacation space)*.    
+This is a fairly complete picture for conditional analysis, and a good start on understanding Bayesian analysis. For now, let's set this aside and look some skills we'll need for model optimization *(which is a big deal in the transaction space)*.    
 ## Foundations for Optimization
 When I interviewed job applicants for analyst and data science positions, I focused on generalization and optimization - that quickly told me if they were an experienced resource. 
 
-Optimization is especially important in Bayesian modeling because the approach uses Markov Chain Monte Carlo *(MCMC)* sampling. MCMC is really the only practical approach to defining probabilities in complex, multidistribution, multilevel, spaces, but it requires a signficant amount of computational resources *and time* to wander through those spaces and find parameters. This is partly becuase of the way the sampler works: 
+Optimization is especially important in Bayesian modeling because the approach uses Markov Chain Monte Carlo *(MCMC)* sampling. MCMC is really the only practical approach to defining probabilities in complex, multi-distributional, multilevel, spaces, but it requires a significant amount of computational resources *and time* to wander through those spaces and find parameters. This is partly because of the way the sampler works: 
 
 High performance computing *(clusters)* helps a lot, but it won't compensate for poor model design. Transformation, Factorization and Reparametrization are essential skills in model design. You may have touched on these topics in prerequisite courses, for example:
 
-* **Transformation** includes scaling *(and centering)*, log transforms, and vectorization *(using vectors instead of iterrative operations)*.  
+* **Transformation** includes scaling *(and centering)*, log transforms, and vectorization *(using vectors instead of iterative operations)*.  
 
-* **Factorization** incluldes QR *(the method utilized by lm)* and Cholesky matrix decomposition *(you practiced factoring quadratics in high school, hopefully - it's the same idea)*. 
+* **Factorization** includes QR *(the method utilized by lm)* and Cholesky matrix decomposition *(you practiced factoring quadratics in high school, hopefully - it's the same idea)*. 
 
 * **Reparameterization**, as a general term, includes factorization, and adds other techniques. We'll introduce these as needed during exercises. 
 
-Many optimization approaches are intended to reduce the total data and the total variance *(keeping in mind that we have to leave breadcrumbs so we can get back to the original scale)*, and we'll explore these later. But fist, we need to build a foundation to understand this all better. We'll fist look at some alternative ways to get the parameters of the regression distributions $\mu, \sigma, b_0, b_1$. We want to know this becuase 
+Many optimization approaches are intended to reduce the total data and the total variance *(keeping in mind that we have to leave breadcrumbs so we can get back to the original scale)*, and we'll explore these later. But fist, we need to build a foundation to understand this all better. We'll fist look at some alternative ways to get the parameters of the regression distributions $\mu, \sigma, b_0, b_1$. We want to know this because 
 
 We'll break this into two sections I'll call variance and decomposition:
 
 ### Variance
 
-Let's start with the familar. Taking our model from above *(mod)*, let's summarize: 
+Let's start with the familiar. Taking our model from above *(mod)*, let's summarize: 
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
 summary(mod)
 ```
-You should be familiar with rmse as a measure of model fit *(1.03 here)*. We often used the follwing function to calcuate rmse for out-of-sample data *(feeding residuals to the function and we used to evaluate model fit)*:
+You should be familiar with rmse as a measure of model fit *(1.03 here)*. We often used the following function to calculate rmse for out-of-sample data *(feeding residuals to the function and we used to evaluate model fit)*:
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
 rmse <- function(error)
 {
   sqrt(mean(error^2))
 }
 ```
-We now need to drill down more on what it means and how it's calculated *(we'll use a normal equation the rest of the way so we can break up the components)*. Recall that the normal equation is: $\beta = (X^T X)^{-1} (X^T Y)$, $\hat{y} = \beta  (X^T)$, and error is $\sum(y - \hat{y})^2/df$ where df is degrees of freedom *(number of observations - estimated coefficiencts)*. So, if we have std error  $\sqrt{\sum(y - \hat{y})^2/df}$, we can compute the covariance matrix $Var(\beta | X) = \sigma^2 (X^TX)^{-1}$. Let's compute these values and compare to lm.   
+We now need to drill down more on what it means and how it's calculated *(we'll use a normal equation the rest of the way so we can break up the components)*. Recall that the normal equation is: $\beta = (X^T X)^{-1} (X^T Y)$, $\hat{y} = \beta  (X^T)$, and error is $\sum(y - \hat{y})^2/df$ where df is degrees of freedom *(number of observations - estimated coefficients)*. So, if we have std error  $\sqrt{\sum(y - \hat{y})^2/df}$, we can compute the covariance matrix $Var(\beta | X) = \sigma^2 (X^TX)^{-1}$. Let's compute these values and compare to lm.   
 
 First, come manual covariance calculations:
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
@@ -340,7 +340,7 @@ Manual Std. Error:
 knitr::kable(vStdErr) %>%
   kable_styling(full_width = F, bootstrap_options = "striped", font_size = 9)
 ```
-And if we don't have $b$ *(and se)*, we can determine those parameters just from the covarince of $(x,y)$:
+And if we don't have $b$ *(and se)*, we can determine those parameters just from the contrivance of $(x,y)$:
 
 $Cov(x,y) = \frac  {\sum(x - \bar{x})*(y - \bar{y})}{n-1}$, and 
 $b_1 =  \frac {Cov(x,y)}{var(x)}$, 
@@ -419,7 +419,7 @@ vStdErr
 
 #### QR
 
-QR decomposition factors the model matrix into a Q and a R matrix *(which by defintion, can be multiplied to yield the original matrix)*. The R is rectangular, and the bottom row is all zeros except the last column - which will align with a beta value. The we just have to backsolve to get the beta values *(we don't actually have to backsolve ourselves, we can use matrix algebra to do it)*.
+QR decomposition factors the model matrix into a Q and a R matrix *(which by definition, can be multiplied to yield the original matrix)*. The R is rectangular, and the bottom row is all zeros except the last column - which will align with a beta value. The we just have to back-solve to get the beta values *(we don't actually have to back solve ourselves, we can use matrix algebra to do it)*.
 
 How come we can do this? Let's start with a normal equation and assume we can factor X into Q and R. Then, see how it can used to solve the beta values:
 
@@ -501,7 +501,7 @@ knitr::kable(thinQRBeta) %>%
 
 OK, so they get the same answer - so what's the big deal?  
 
-Keep in mind that an algorithm to solve a regression equation is going to try to minimize error, and most of the algorithms that solve the more complex regressions, do so using derivative based methods and maximum likelihood. The Bayesian world uses sampling to find parameters, but it samples derivatives of the log probability of the joint distributions *(which can be hunderds or even thousands - especially in multilevel cases)*. And the magnitude and variances of the parameters and data has a **BIG** effect on performance. With that in mind, let's just look at magnitude and variance of the data vs the thin Q and R:  
+Keep in mind that an algorithm to solve a regression equation is going to try to minimize error, and most of the algorithms that solve the more complex regressions, do so using derivative based methods and maximum likelihood. The Bayesian world uses sampling to find parameters, but it samples derivatives of the log probability of the joint distributions *(which can be hundreds or even thousands - especially in multilevel cases)*. And the magnitude and variances of the parameters and data has a **BIG** effect on performance. With that in mind, let's just look at magnitude and variance of the data vs the thin Q and R:  
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo = T}
 var(mX)
 ```
@@ -514,19 +514,19 @@ Winner! Thin QR. That's the idea anyway.
 
 #### Cholesky  
 
-One more tool. Cholesky decomp works the same way as QR, but it handles sparse matrices better *(sparce matrices are ones with lots of zeros and it's very common in transaction analysis - think of ERP tables, and how that translates into a model matrix with indicator variables - lots of them)*. We'll just run a simple example:
+One more tool. Cholesky decomp works the same way as QR, but it handles sparse matrices better *(spase matrices are ones with lots of zeros and it's very common in transaction analysis - think of ERP tables, and how that translates into a model matrix with indicator variables - lots of them)*. We'll just run a simple example:
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo = T}
 #use Cholesky to esimate beta
 vBeta3 = chol2inv(chol(t(mX)%*%mX)) %*% t(mX)%*% vY
 vBeta3
 ```
 
-chol produces the Cholesky decompositon and chol2inv produces the inverse, so we're back to $\beta = (X^TX)^{-1} (X^tY)$!! but in a process that can deal with LARGE datasets. 
+chol produces the Cholesky decomposition and chol2inv produces the inverse, so we're back to $\beta = (X^TX)^{-1} (X^tY)$!! but in a process that can deal with LARGE datasets. 
 
 
 #### EndNotes:
 
-1. A significant portion of our masters students are joining large consulting, risk management and assurance practices. Be aware that there's a common misconception about distributions: The "central limit theorem" doesn't transform a distribution. Most transaction distributions are not normal and increasing the number samples *(or sample size)* isn't going to magically transform the distribution to normal so you can apply the probabilities from intro statistics. It's true that, if we increase samples or sample size, the **means** of the samples will be normally distributed -  but this doesn't provide any value in modeling or projecting transactions *(the mean is not a parameter in non-normal distribtuions, so it's rather useless)*. Maybe this explains why Audit firms practices around projects are so poor *(see "Insights into Large Audit Firm Sampling Policies" Brant E. Christensen, Randal J. Elder - AAA Journal)*. And "Big Data" isn't going to solve the problem.
+1. A significant portion of our masters students are joining large consulting, risk management and assurance practices. Be aware that there's a common misconception about distributions: The "central limit theorem" doesn't transform a distribution. Most transaction distributions are not normal and increasing the number samples *(or sample size)* isn't going to magically transform the distribution to normal so you can apply the probabilities from intro statistics. It's true that, if we increase samples or sample size, the **means** of the samples will be normally distributed -  but this doesn't provide any value in modeling or projecting transactions *(the mean is not a parameter in non-normal distributions, so it's rather useless)*. Maybe this explains why Audit firms practices around projects are so poor *(see "Insights into Large Audit Firm Sampling Policies" Brant E. Christensen, Randal J. Elder - AAA Journal)*. And "Big Data" isn't going to solve the problem.
 
 
 ## Homework Assignment
