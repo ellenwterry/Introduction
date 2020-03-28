@@ -17,7 +17,7 @@ There have been challenges to adoption:
 
 * There's a learning curve. Bayesian analysis is not building pie-charts in dashboards - it requires quantitative aptitude, and a commitment to understanding.   
 
-Still, adoption proceeded because Bayesian analysis provides **substantial and unique** benefits in business modeling:  
+Still, rapid adoption has proceeded because Bayesian analysis provides **substantial and unique** benefits in business modeling:  
 
 * **Integration of Experience and Evidence.** The messy, ambiguous, intuitive opinions of experienced managers are often really good data*(maybe weak in reliability, but strong in relevance)*. These can captured and merged with other data *(e.g., transactions)* in a formal, statistically valid process to produce models that balance the intuitive with the quantitative.  
 
