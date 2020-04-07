@@ -1,14 +1,16 @@
----
-title: "Intro to Bayesian Transaction Analysis"
-author: "Ellen Terry"
-last update: "3/20/2020"
-output: md_document
----
-
 ## Introduction
-It's helpful for business analysts to think of markets as latent sales transactions. This perspective keeps the focus on results, and extends throughout the entire value chain. Business activity can be naturally cast as prior transactions, current transactions, and posterior projections of transactions. The transactions in business systems have integrity, and the dimensions serve as a guide to **business drivers** *(which transitions transactions from latent to realized state)*. Business analysis and planning is about understanding these states, and the causes and effects of the transition, with a goal of producing models that are relevant and **actionable**. It's not the only source of data, but it is the place to start.
+The terms "Analyst" and "Analytics" are overloaded to the extent of meaninglessness. In the interest of clarity, within the context of this study, we'll define:
 
-Bayesian modeling provides  **statistical validity** to the planning process, while balancing **risk management** with **agility**, **reliability** with **relevance**. Well established in Insurance, Pharmaceuticals, and Banking *(esp. Trading)*, it is expanding across industries to a wide application scope *(one interesting development is the use of Bayesian modeling in assurance of AI project deliverables, where the parameters are noninterpretable, and the probability of outcomes is unknown)*. The probabilistic basis of Bayesian modeling is an important tool in an uncertain world. 
+**Analytics**. The term analytics was first used by Aristotle in "Prior Analytics" and "Posterior Analytics", to describe a **system of reasoning and inference**. Current confusion of the term with technology tools does not alter this core definition. Technology tools are of great utility, especially in business analysis, but reasoning and inference is the essence of analytics and uniquely human. And still, the best way to learn reasoning and inference is to build intuition through case study.
+
+**Analyst**. In this context, we are focused on the business analyst, a role that is responsible to define and **direction** and **drivers** of an **enterprise**. There are extensions to these goals: operational monitoring and assurance, risk management, budgeting, etc. But these are extensions of the role and can be resourced and delegated. Without models ythat comprehend direction and drivers, it all becomes superfluous. It should also be considered that defining the direction and drivers of a business is not a top down exercise - the evidence is in the data.    
+
+## Business Analysis and Transaction Data
+It's helpful for business analysts to think of markets as latent sales transactions. This perspective keeps the focus on results, and extends throughout the entire value chain. Business activity can be naturally cast as prior transactions, current transactions, and posterior projections of transactions. The transactions in business systems have integrity, and the dimensions serve as a guide to **business drivers** *(which transitions transactions from latent to realized state)*. Business analysis and planning is about understanding these states, and the causes and effects of the transition, with a goal of producing models that are relevant and **actionable**. 
+
+
+## Business Modeling (Bayesian Approach)
+Bayesian modeling provides the **statistical validity** essential to a planning process that produces reliable and relevant analyses. Well established in Insurance, Pharmaceuticals, and Banking *(esp. Trading)*, it is expanding across industries to a wide application scope *(one interesting development is the use of Bayesian modeling in assurance of AI project deliverables, where the parameters are noninterpretable, and the probability of outcomes is unknown)*. The probabilistic basis of Bayesian modeling is an important tool in an uncertain world. 
 
 There have been challenges to adoption:  
 
