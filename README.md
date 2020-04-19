@@ -15,7 +15,7 @@ Integration of driver data into models has challenges and the data are often amb
 
 * **Interpretable, Probabilistic Results** Bayesian analysis produces projections and parameters with probabilities that people can understand. It can answer the questions central to business analysis, like: *"how much of which resources do we need to achieve plan, and what's the probability of that happening?"* Machine learning *(ML)* and Artificial Intelligence *(AI)* can't do this. This directly addresses the risk management components of planning and assurance. 
 
-* **Multilevel Analysis with Effects** Business value-chains and transaction environments are almost always multilevel. Multilevel analysis is not uniquely Bayesian, but Bayesian model does provide more flexibility and control. 
+* **Multilevel Analysis with Effects** Business value-chains and transaction environments are almost always multilevel. Multilevel analysis is not uniquely Bayesian, but Bayesian modeling provides more flexibility and control than frequentist approaches. 
 
 * **Granular Control over Model Design and Tuning** Models can be tuned *(and generalized)* down to specific parameters. This also relates to multilevel design.
 
