@@ -3,7 +3,7 @@
 
 ----
 
-These repositories support the Bayesian Bayesian Modeling for Planning and Assurance  at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+These repositories support **Bayesian Modeling for Planning and Assurance**  at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
 
 ----
 
