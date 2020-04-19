@@ -3,7 +3,9 @@
 
 ----
 
-These repositories support the Bayesian Analysis course at the Bauer Graduate Business School and HP Enterprise Data Science Institute. 
+These repositories support the Bayesian Bayesian Modeling for Planning and Assurance  at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+
+----
 
 Analytics was first defined by Aristotle in "Prior Analytics" to describe a system of logic - a process for inference. While this course leverages a range of technologies, the goal is to build the capabilities to recognize, define, and integrate business drivers into models for planning and assurance. Pursuit of business drivers has a long history: From the first business intelligence channels described in the "Cyclopaedia of Commercial and Business Anecdotes" in 1865, to Sam Walton flying over parking lots to count cars in 1950, to NLP and GPS applications searching social media and satellite images for clues to emerging trends *(read  JPMorgan's "Global Quantitative & Derivatives Strategy" provided)*.  
 
