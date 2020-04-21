@@ -1,15 +1,15 @@
 
-### Bayesian Modeling for Planning and Assurance
+### Bayesian Analysis for Planning and Assurance
 
 ----
 
-These repositories support **Bayesian Modeling for Planning and Assurance**  at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+These repositories support **Bayesian Analysis for Planning and Assurance**  at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
 
 ----
 
-Analytics was first defined by Aristotle in "Prior Analytics" to describe a system of logic - a process for inference. While this course leverages a range of technologies, the goal is to build the capabilities to recognize, define, and integrate business drivers into models for planning and assurance. Pursuit of business drivers has a long history: From the first business intelligence channels described in the "Cyclopaedia of Commercial and Business Anecdotes" in 1865, to Sam Walton flying over parking lots to count cars in 1950, to NLP and GPS applications searching social media and satellite images for clues to emerging trends *(read  JPMorgan's "Global Quantitative & Derivatives Strategy" provided)*.  
+Analytics was first defined by Aristotle in "Prior Analytics" to describe a system of logic - a process for inference. While this course leverages a range of technologies, the underlying goal is the same: to build intuition for inference, and develop the capabilities to recognize, define, and integrate **relevant** business drivers into models for planning and assurance. Pursuit of business drivers has a long history: From the first business intelligence channels described in the "Cyclopaedia of Commercial and Business Anecdotes" in 1865, to Sam Walton flying over parking lots to count cars in 1950, to NLP and GPS applications searching social media and satellite images for clues to emerging trends *(read  JPMorgan's "Global Quantitative & Derivatives Strategy" provided)*.   
 
-Integration of driver data into models has challenges and the data are often ambiguous. But we work to disambiguate and validate because the resulting models are more relevant, and explanatory *(provided the models are probabilistic)*. Then, we can add the more accessible, structured data often found in ERP and line-of-business systems. This is a core strength of Bayesian modeling, which includes:
+Integration of **relevant** driver data into models has many challenges including ambiguity of data. In Bayesian analysis, the trade off between relevance and reliability is explicitly managed, and the process disambiguates and validates data, and the models are more relevant, and explanatory - i.e., **actionable**. This process yields many benefits:      
 
 * **Integration of Experience and Evidence** Relevant business planning and assurance data often include: industry trends, opportunities and threats, competitor capabilities and capacity, brand loyalty and price sensitivity, intuition of experienced managers, etc. These data can integrated with operational data in a formal, statistically valid process that produces explanatory models with increasing credibility. 
 
@@ -23,12 +23,14 @@ Integration of driver data into models has challenges and the data are often amb
 
 ----
 
-Hopefully, these benefits motivate you to invest some time in learning Bayesian Analysis. The repositories here are:
+Repositories *(recommend cloning as the content is frequently updated)*:
 
-* **Foundations**. Review of basic statistics and linear algebra concepts necessary for Bayesian analysis *(in R and Python)*. These are prerequisite assumptions.
+* **Foundations**. Review of basic statistics and linear algebra concepts necessary for Bayesian analysis *(in R and Python)*. These are prerequisite.
 
-* **Introduction**. Introduction to Bayesian modeling with simple applications..
+* **Introduction**. Introduction to Bayesian Theory with focus on distributions and probability *(completion of statistics assumed)*.   
 
-* **Advanced Applications**. Case studies will include **planning**  *(e.g., planning orders, pricing policy, supply chain agreements, and industry trends)*, **operations and process automation** *(e.g., pricing products, assets and derivatives)* **assurance** *(e.g., project deliverables quality testing, controls testing and financial statement assertions)*.
+* **Modeling**. Models and extensions for analysis of distributions and relationships.  
+
+* **Applications**. Case studies will include **planning**  *(e.g., planning orders, pricing policy, supply chain agreements, and industry trends)*, **operations and process automation** *(e.g., pricing products, assets and derivatives)* **assurance** *(e.g., project deliverables quality testing, controls testing and financial statement assertions)*.
 
 ------
