@@ -1,4 +1,3 @@
-
 ### Bayesian Analysis for Planning and Assurance
 
 ------
@@ -6,12 +5,10 @@ These repositories support **Bayesian Analysis for Planning and Assurance** cour
 
 ------
 
-Analytics was first defined by Aristotle in "Prior Analytics" to describe a system of logic - a process for inference. While this course leverages a range of technologies, analytics is still the same: an inference process - applied to business planning and assurance. Planning and assurance processes begin with identification and integration of relevant business drivers. This requires creativity: the pursuit of business drivers has a long history: From the first business intelligence channels described in the "Cyclopaedia of Commercial and Business Anecdotes" in 1865, to Sam Walton flying over parking lots to count cars in 1950, to NLP and GPS applications searching social media and satellite images for clues to emerging trends *(read  JPMorgan's "Global Quantitative & Derivatives Strategy" provided)*. We develop this capability through case study, integrated with the study of statistics and modeling technologies.  
-
-Integration of driver data into models also has many challenges, including data ambiguity, alluded to above. Business strategy, as reflected in the planning and assurance processes, is usually based on a set of assumptions and goals, that are semi-structured into rubrics, and then translated to metrics. In Bayesian analysis, this translation is explicitly managed as data are disambiguated and validated. So, models evolve and relevance is sustained. Models are also explanatory *(i.e., actionable)*, and quantitative.   
-
-Bayesian Analysis has many unique benefits:      
-
+Analytics was first defined by Aristotle in "Prior Analytics" to describe a system of reasoning and inference. While this course leverages a range of technologies, the application of analytics is still a system of reasoning and inference, and technology just scales the processes - including those that are poorly reasoned. In this course, we focus on analytics as applied to planning and assurance processes. 
+Planning processes translate business opportunities and threats to independent drivers of revenues, margins, risks, etc. Assurance is most relevant when it tests the execution of processes defined by the planning models, and most reliable when it can draw inferences from independent drivers. This course will explicitly introduce methods and models, while integrating business translation through case study. Balance is important here: Poorly designed "analytics" implementations are, unfortunately, quite common - often due to inflated expectations of technology, or weak, disintegrated business models *(the terms 'data driven' and 'dashboards' are red flags here)*.  We want to avoid encouraging these errors. 
+Identification and  integration of relevant business drivers is not trivial pursuit. It's a pursuit with a long history: from the first business intelligence channels described in the "Cyclopaedia of Commercial and Business Anecdotes" in 1865, to Sam Walton flying over parking lots to count cars in 1950, to NLP and GPS applications searching social media and satellite images for clues to emerging trends *(read  JPMorgan's "Global Quantitative & Derivatives Strategy" provided)*.  And once identified, the integration of driver data into models can be challenging. The data are often ambiguous and semi-structured, and must be redefined as model metrics. In Bayesian analysis, this translation is explicitly managed as data are disambiguated and validated. So, models evolve while  relevance and reliability are increased. Models are also explanatory *(i.e., actionable)*.  
+Overall, Bayesian analysis provides many unique benefits in planning and assurance:
 * **Integration of Experience and Evidence** Business planning often begins with industry trends, opportunities and threats, competitor capabilities and capacity, brand loyalty and price sensitivity, intuition of experienced managers, etc. This data can be integrated with operational data into probabilistic models. 
 
 * **Explanatory Parameters** The models produce projections and parameters with probabilities that people can understand and use - i.e., they're explanatory.  
@@ -38,6 +35,6 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Ellen Terry
 
-Ellen Terry began her career in M&A analysis at Deloitte, developing econometric models for industry forecasting and asset valuation, later transitioning into Post Merger Integration *(PMI)*, transitioning valuation models and processes into operations. She joined Microsoft and led development of industry solutions *(solution templates)*, working through partner channels. Post-Microsoft, she worked for GE as Director of Planning and Programs *(plan implementation)*, and JP Morgan as a VP Data Science. She's a Professor of Practice at Bauer, and independently consults with Planning and Assurance clients and mentors consulting groups.   
+Ellen Terry began her career in M&A analysis at Deloitte, developing econometric models for industry forecasting and asset valuation, later transitioning into Post Merger Integration *(PMI)*. She joined Microsoft and led development of industry solutions *(cross platform templates)*, leading implementation through partner channels. Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as a VP Data Science. She's currently a Professor of Practice at Bauer, and an independent consultant and mentor to planning and assurance groups.   
 
 ------
