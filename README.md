@@ -8,7 +8,7 @@ These repositories support **Bayesian Analysis for Planning and Assurance** cour
 
 Analytics was first defined by Aristotle in "Prior Analytics" to describe a process for reasoning and inference. While the information technology industry has created an amazing array of tools, analytics is still about reasoning and inference, and tools are not a substitute for this very human capability.  That said, this is not a course in theory - some theory is necessary, but not an academic excursion. Rather, this course is about translating components of the economic ecosystem to models - and models are structures for reasoning and inference.  
 
-Planning processes seek to understand and translate business opportunities and threats to independent drivers of revenues, margins, risks, etc. to models that support an actionable plan. Assurance processes extend planning models and test execution. If these models are based on independent drivers, then the process is more likely to be relevant and reliable.  
+Planning processes seek to understand and translate business opportunities and threats to independent drivers of revenues, margins, risks, etc. to models that support an actionable plan. Assurance processes extend planning models and test execution. If these models are based on independent drivers, then the process is more likely to be relevant.  
 
 This course will explicitly introduce methods and models, while integrating business translation through case study. Balance is important here: Poor analyses are quite common, and often technology-driven, or data-driven rather than business-driven. Why? Because identifying business drivers is more difficult than installing software, looking at dashboards and stating the obvious.  
 
