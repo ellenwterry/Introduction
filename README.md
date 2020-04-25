@@ -1,7 +1,9 @@
 ### Bayesian Analysis for Planning and Assurance
 
 ------
+
 These repositories support **Bayesian Analysis for Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+
 ------
 
 Analytics was first defined by Aristotle in "Prior Analytics" to describe a process for reasoning and inference. While the information technology industry has created an amazing array of tools, analytics is still about reasoning and inference, and tools are not a substitute for this very human capability.  That said, this is not a course in theory - some theory is necessary, but not an academic excursion. Rather, this course is about translating components of the economic ecosystem to models - and models are structures for reasoning and inference.  
