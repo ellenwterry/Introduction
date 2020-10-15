@@ -18,9 +18,9 @@ Before getting into Conditional Probability, let's level-set on a few assumption
 
 * Regression assumes a relationship between dependent and independent variables with a wide range of distributions. 
 
-* Independent variables ($x$) can be any distribution, but the residuals $(y - \hat{y})$ should be normally distributed **after the model has been applied (e.g., $a+bx$ in a simple linear case)**. That said, dependent variables ($y$) in transaction environments are seldom normally distributed. But there are approaches for transforming variables, and designing models *(either in the equation or model distributions)*, that can address a wide range of distributions. So, this should not be a problem and it's **not** OK to *assume the data are normally distributed based on the Central Limit Theorem*. See EndNote$^1$. 
+* Independent variables ($x$) can be any distribution, but the residuals $(y - \hat{y})$ should be normally distributed *after the model has been applied (e.g.,* $b_0+b_1x$ *in a simple linear case)*. That said, variables ($y$) in transaction environments are seldom normally distributed. But there are approaches for transforming variables, and designing models *(either in the equation or model distributions)*, that can address a wide range of distributions. So, this should not be a problem and it's **not** OK to *assume the data are normally distributed based on the Central Limit Theorem*. See EndNote$^1$. 
 
-* There is also an assumption about homoscedasticity *(or homogeneity of variance)*, which relates to the distribution of $y$. 
+* There is also an assumption about homoscedasticity *(eliptical homogeneity of variance)*.  
 
 So, with those in mind, let's look at this how the distribution of $y$ changes when we set conditions on $x$ *(with a Bayesian twist)*  
 
@@ -72,7 +72,7 @@ Knowing the **mean** for a specific value of $x$ is a good start, and we can get
 
 $P(y_1 \leq y \leq y_2, x_1 \leq x \leq x_2) = \int_{y_1}^{y_2} \int_{x_1}^{x_2} p(x,y) \,dx\,dy$ 
 
-So in our example *(simplified by the discrete variables)*, the pdf could be stated as:
+So in our example *(simplified temporarily by the discrete variables)*, the pmf could be stated as:
 
 $P(y = 5 | x = 3 ) = \Pi (y = 5|x = 3)$ 
 
@@ -90,7 +90,7 @@ $CV = weighted.mean((y-EY), conditional.density)$
 
 *(these are shortcuts to the precise methods outlined in BDA, which is painfully tedious. We really don't have to do this my hand, so just work trough this a few times, and we'll introduce other methods)*
 
-if we
+We'll create a conditional probability table here *(review C1_Classification_LogReg.pptx if needed)*
 
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
 
@@ -147,7 +147,7 @@ PF1 = ggplot(base, aes(xy)) +
 library(cowplot)
 plot_grid(p2, PF1, nrow = 1, ncols = 2) 
 ```
-The conditional mean $E(E(y | x))$ is not the mean of $y$ where $x=3$, it is the conditional **mean** over the *marginal* distribution - and it won't be the same. Let's try to clear this up a bit. The conditional mean should be a little higher than just the distribution of $y$ where $x=3$ *(these plots are not precisely aligned, sorry about that)*. It will get "pulled" more towards the center of the marginal $y$.  
+The conditional mean $E(E(y | x))$ is not the mean of $y$ where $x=3$, it is the conditional **mean** over the *marginal* distribution - and it won't be the same. Let's try to clear this up a bit. The conditional mean should be a little higher *(in this case)* than just the distribution of $y$ where $x=3$ *(these plots are not precisely aligned, sorry about that)*. It will get "pulled" more towards the center of the marginal $y$.  
 
 Let's ignore conditional parameters, and just estimate the mean of $y$, if it were all we had was the data from $x=3$:
 ```{r, message=F, warning=F, fig.width=7, fig.height=3, fig.align="center", echo = T}
@@ -171,12 +171,14 @@ library(cowplot)
 plot_grid(p1, PF, nrow = 1, ncols = 2)
 
 ```
-Now let's compare these. Notice that the conditional mean is closer to the overall mean of $y$. It's *weighted* by the marginal population. Let's talk about how this works. 
+Now let's compare these using continuous simulated densities *(to help visualization)*. Notice that the conditional mean is closer to the overall mean of $y$. It's *weighted* by the marginal population. Let's talk about how this works. 
 
+The second estimate *(from a model based on x=3 data only)* ignores that there is a bigger market for $y$, with a tendency to "pull" $y$ up, towards the mean. Which one do you think is the better estimate? Now, let's look at all 3 Distributions: 
 
-The second estimate ignores that there is a bigger market for $y$, with a tendency to "pull" $y$ up, towards the mean *(central tendency)*.   
-
-Which one do you think is the better estimate? Now, let's pull everything together and compare:
+1. Distribution based on weighted mean, conditioned on x = 3 *(red)*
+2. Distribution based on data limite to x = 3 *(blue)*
+3. Distribution of y with no condition *(cyan)*
+  
 ```{r, message=F, warning=F, fig.width=7, fig.height=3, fig.align="center", echo = T}
 
 base <- data.frame(x = seq(0, 10, by = .01))
@@ -194,33 +196,45 @@ PF = ggplot(base, aes(x)) +
 library(cowplot)
 plot_grid(p1, PF, nrow = 1, ncols = 2)
 
-# and adding lm's prediciton
-
-lmPred = predict(mod, newdata = AnalysisSummary2)
-
-PF = PF + 
-  geom_line(aes(x,y= dnorm(x, mean = as.numeric(lmPred[1]), sd = as.numeric(summary(mod)[6]))), color = "green") 
-plot_grid(p1, PF, nrow = 1, ncols = 2)
-
-
 ```
-Note that location and scale shifts for each estimate. But which one is most realistic for $x=3$? Also consider that often, we don't have the full marginal distribution of $y$. 
+Note that location and scale shifts for each estimate where the weighted distribution is a **compromise** between the data conditioned on x =3 and the unconditioned distribution of y *(the marginal)*. Which one is most realistic for $x=3$? Which one would you bet your job on?
 
+Now, let's go back to the original question: What's the probability that sales = 5M, given the advertising budget = 3k? In this case, we have a discrete question. Repeating the conditional table for convenience:  
 ```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
 knitr::kable(MarAnalysis) %>%
   kable_styling(full_width = F, bootstrap_options = "striped", font_size = 9)
 
 ```
-
-From a classic Bayes Theorem perspective:
+A Bayes Theorem solution:
 
 $P(Sales = 5 | Budget = 3) = \frac{P(Budget = 3 | Sales = 5)*P(Sales = 5)}{P(Budget = 3)}$
 
-$P(Sales = 5 | Budget = 3) = \frac{.30 x .17}{.14} = .36$
+$P(Sales = 5 | Budget = 3) = \frac{(.05/.17)*.17}{.14} = .357$
 
-Note $P(Budget = 3 | Sales = 5)$ is determined from the condition distribution Sales, so the probability of Budget = 3 in that distribution *()*
+Note $P(Budget = 3 | Sales = 5)$ is determined from the condition distribution of the Sales margin.
 
-We're not done yet. There are few other distributions that are important in our analysis - those of the parameters. We'll just pull those for awareness:
+Another way of solving this is with a Bayesian Update Table *(again, review C1_Classification_LogReg.pptx if needed)*. In the example below, we back into the likelihood *(still not realistic - for pedagogical purposes)*:  
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+BUT = data.frame(
+  y = MarAnalysis$y,
+  Prior = MarAnalysis$Total,
+  Like = (MarAnalysis$`3`/MarAnalysis$Total))
+BUT = BUT %>% 
+  filter(y != 'Total') %>%
+  mutate(
+  BayesNum = Prior * Like,
+)
+Den = sum(BUT$BayesNum, na.rm = T)
+BUT$Posterior = BUT$BayesNum/Den
+
+knitr::kable(BUT) %>%
+  kable_styling(full_width = F, bootstrap_options = "striped", font_size = 9)
+
+```
+Notice above that we just mulitplied the prior * likelihood and then normalized the Bayes numerator to the the posterior *(which agrees with the formula answer above)*. This is important becuase we seldom have conditional probabilities like in the conditional table above *(vs the Bayesian Upate Table above)*, and we usually don't know the marginal probablities either. So reality is a long way away from this academic exericise. What do we do? For starters, we can just sample the data to get the Likelihood *(hold that thought - we'll come back to this)*  
+
+To finish this discrete case exercise, there are few other distributions that are important in our analysis - those of the parameters. We'll just pull those for awareness:
 ```{r, message=F, warning=F, fig.width=4, fig.height=4, fig.align="center", echo = T}
 
 coef = summary(mod)$coeff[, "Estimate"]
@@ -241,8 +255,183 @@ pp2 <- ggplot(dfData) +
 plot_grid(p1, PF, pp1, pp2, rows = 2, cols = 2)
 
 ```
-This is a fairly complete picture for conditional analysis, and a good start on understanding Bayesian analysis. For now, let's set this aside and look some skills we'll need for model optimization *(which is a big deal in the transaction space)*.  
+This is a fairly complete picture of a conditional analysis, and a good start on understanding Bayesian data analysis.  
 
+### Continuous Case 
+
+Let's change the discrete case and say that y is a continuous variable, and management wants to know the probability that sales could be 5 or greater, given a budget of 3 *(a more realistic case)*. So:
+
+$P(Sales >= 5 | Budget = 3) = \frac{P(Budget = 3 | Sales >= 5)*P(Sales = 5)}{P(Budget = 3)}$  
+
+Recreating the data without forcing a discrete y:
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+intercept = 2
+slope = 1
+N = 100
+
+# generate discrete data
+ExampleData1c = data.frame(x = as.integer((rnorm(N, 5, sd = 1)))) %>%
+  mutate(y = (intercept + (slope * x)) + rnorm(N, 0, sd = 1))
+
+# plot using ggextra format (you can use density with discrete variables too)
+
+plot_center = ggplot(ExampleData1c, aes(x=x,y=y, colour = factor(x))) + 
+  geom_point(width = .05) +
+  geom_smooth(method="lm", se = F) +
+  theme(panel.background = element_rect(fill = "white")) +  
+  ylab("Sales") + xlab("Budget")
+pC = ggMarginal(plot_center, type="density", groupColour = FALSE, groupFill = TRUE)
+pC
+
+
+```
+ggmarginal won't let us show a discrete on one margin and continuous on another, so focus on the Sales margin for now, keeping in mind that budget is discrete.
+
+Since we're now trying to find Sales > 5, we'll need to define a continuous  distribution with a condition of budget = 3. And like the discrete cases above, this distribution does NOT project the densities of the conditional case, it defines the data before it is projected to a posterior. That must consider the denominator *(like we did with the BAT above)*. But this is a continuous case, so we need another way. There are a couple of ways to do this *(and we'll study these both in later classes)*  
+
+1. Directly determine the parameters *(must be conjugate, and limited to a few distributions)* Conjugate distributions are those of the same type *(i.e. normal, binomial, etc.)* . In a normal case, we can project $P(Sales >= 5 | Budget = 3)$ using formulas:  
+
+$\sigma = \sqrt{\frac{1}{\sigma_1^{-2} + \sigma_2^{-2}}}$
+
+$\mu = posterior \sigma^2 * \frac{\mu_1}{\frac{\sigma^2 + \mu_2}{\sigma_2^2}}$
+
+This is all for building understanding, but it's not very practical. 
+
+2. Multiplying the Distributions and then figuring out the parameters. This is more common approach, based on a restatement of Bayes Rule. $P(\theta | Data) = \frac {P(\theta) * P(Data | \theta))}{P(Data)}$, works well for inverting probabilities in a closed system. In this case, the denominator $P(Data)$ is the marginal probability of the population. It serves as a normalizing constant *(bayes denominator)*. 
+
+But it is a constant. And recall how, in maximum likelihood, we can dropped the constant portion of the binomial density function $\frac{n!}{n-h!}$ while varying $p$ for likelihood. We can do the same here with the normalizing constant Then, the equation becomes:
+
+$P(\theta | Data) \propto P(\theta) * P(Data | \theta)$, or  
+
+$Posterior(\theta | Data) \propto Prior(\theta) * Likelihood(Data | \theta)$, where $\propto$ means "proportionate to". We can normalize later. So we can just multiple the prior x likelihood to get the posterior.
+
+```{r, message=F, warning=F, fig.width=8, fig.height=3, fig.align="center", echo=T}
+
+plm = ggplot(ExampleData1c, aes(x = x, y= y)) + 
+  geom_point() +
+  theme(panel.background = element_rect(fill = "white")) 
+
+dfData <- data.frame(x = seq(1, 10, length.out = nrow(ExampleData1c)))
+denY = data.frame(y = dfData$x, density = dnorm(dfData$x, mean = mean(ExampleData1c$y), sd = sd(ExampleData1c$y)))
+denY$cDensity3 = dnorm(denY$y, mean = mean(filter(ExampleData1c, x == 3)$y) , sd = sd(filter(ExampleData1c, x == 3)$y))
+
+
+PF3 = ggplot(denY, aes(x = y, y= density)) +
+  geom_line(color = "red") +
+  geom_line(aes(x = y, y= cDensity3), color = "cyan4") +
+  theme(panel.background = element_rect(fill = "white"), 
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()) +  
+  xlim(0, 14) +
+  xlab("")+
+  ylab("density") +
+  coord_flip()
+
+#plot_grid(plm, PF3, nrow = 1, ncols = 2)
+
+denY$pDensity3 = denY$density*denY$cDensity3
+# normalize
+spDen3 = sum(denY$pDensity3)
+denY$pDensity3 = denY$pDensity3/spDen3
+
+PF3 = PF3 + 
+  geom_line(aes(x = y, y= denY$pDensity), color = "orange") 
+
+
+plot_grid(plm, PF3, nrow = 1, ncols = 2)
+
+```
+The posterior density has smaller values because it's density * density, which are both small values. But, as you learned in level 1 stats, density is just density - it's only meaningful in relation to itself. We can convert density to probability - all we have to do is divide it by the sum of itself *(i.e., we "normalize" it)*  
+
+Why do we go through all this distribution stuff? Because people want to know the probability of a decision or opinion. **No distribution = No probability**. So, now that we have the distributions, we can compute the probability of sales > 5, given a budget of 3.  
+
+And just for comparison, let's add the distribution of sales conditioned on a budget of 6.
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+denY$cDensity6 = dnorm(denY$y, mean = mean(filter(ExampleData1c, x == 6)$y) , sd = sd(filter(ExampleData1c, x == 6)$y))
+denY$pDensity6 = denY$density*denY$cDensity6
+# normalize
+sPDen6 = sum(denY$pDensity6)
+denY$pDensity6 = denY$pDensity6/sPDen6
+
+
+PF4 = ggplot(denY, aes(x = y, y = pDensity3)) +
+  geom_line() + 
+  geom_line(aes(y= pDensity6), color = "cyan4") +
+  theme(panel.background = element_rect(fill = "white"))
+PF4
+
+```
+Given the posterior densities, we can convert these to simulations and then get parameters.
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+N2 = 100
+denY$Sim3 = as.integer (denY$pDensity3*N2)
+mean(denY$sim3 * denY$y)
+denY$Sim6 = as.integer (denY$pDensity6*N2)
+mean(denY$sim6 * denY$y)
+
+
+
+
+PF5 = ggplot(denY, aes(x = y, y = Sim3)) +
+  geom_line(color = "red") + 
+  geom_line(aes(y= Sim6), color = "cyan4") +
+  xlim(0, 10) +
+  theme(panel.background = element_rect(fill = "white"))
+
+PF6 = ggplot(filter(ExampleData1c, x %in% c(3, 6)), aes(x = y, fill = factor(x))) +
+  geom_histogram(binwidth = .2) +
+  xlim(0, 10) +
+  theme(panel.background = element_rect(fill = "white"), legend.position="none")
+
+plot_grid(PF5, PF6, nrow = 2)
+
+```
+Comparing to original data above.
+
+So, using the pnorm functions, we can get the probabilities (of sales > 5 where Budget = x):
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+
+Params3 = denY %>% filter(Sim3 > 0 ) %>% select(y, Sim3)  
+Params6 = denY %>% filter(Sim6 > 0 ) %>% select(y, Sim6)  
+
+dfComp = data.frame(Description = c("Budget = 3", "Budget = 6"), 
+                    Prob = c((1 - pnorm(5, mean(rep(Params3$y, Params3$Sim3)), 
+                                       sd(rep(Params3$y, Params3$Sim3)))),
+                             (1 - pnorm(5, mean(rep(Params6$y, Params6$Sim6)),
+                                       sd(rep(Params6$y, Params6$Sim6)))))
+)
+
+                            
+knitr::kable(dfComp) %>%
+  kable_styling(full_width = F, bootstrap_options = "striped", font_size = 9)
+
+
+```
+
+*This is a really kludgy way to illustrate the problem, but it's visible and meant to build understanding* 
+
+Just to review, this process is used to produce projection *(posterior)* and it is not going to work in complexity scenarios, for reasons we will study soon.
+
+That does not mean that analysis of conditional distributions does not have value for understanding data and relationships *(and this would involve the first half of this process - before we multiplied the likelihood and prior)*. It most definately does - I thought I would take this opporutnity to walk us through some concepts we'll need later.
+
+### Homework
+
+For homework, please take the same data, and compare problabilities of Sales > 5 for each value of x and submit an analysis on a pdf. 
+
+
+
+
+
+
+
+---
 
 ## Foundations for Optimization
 When I interviewed job applicants for analyst and data science positions, I focused on generalization and optimization - that quickly told me if they were an experienced resource. 
