@@ -1,5 +1,5 @@
 ---
-title: "1-1 Introduction to Bayesian Modeling"
+title: "Introduction to Bayesian Modeling"
 subtitle: "Distributions"
 output: pdf_document
 ---
@@ -25,7 +25,7 @@ So, that's where we begin. Now, let's discuss a few overall concepts that will b
 
 Now, we're going to walk through three models with conjugate distributions *(distributions of the same family)*. This is a nice, clean scenario, and a good exercise for building intuition. We're also going to walk through direct calculation of posterior parameters with two of the models *(the last one - a skew normal doesn't have a closed form solution, so we can't do that)*. Then we'll use these directly determined posteriors as a baseline for comparing and understanding sampling.  
 
-We'll also parameter a distribution to get a feel for how that works - as this is a handy skill.
+We'll also **reparameterize** a distribution to get a feel for how that works - as this is a handy skill.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -153,7 +153,7 @@ One element about the model that may seem new is the definition of the variance 
 
 >There is a similar scenario regrading sales of new products different markets that was posted in the Repository introduction. These scenarios are about forecasting, which eventually end up in plans and budgets. Don't get the idea that forecasts are just some doodles in a spreadsheet - they are the basis of major commitments and budgets (operating and capital), and have to be approved by the Board of Directors (as mandated in the Corporate Charter). And for assurance and audit professionals, these models explain the relationships between external drivers and business results - often they provide the best evidence for opinions.   
 
-These sigmas also give us the ability to **generalize** and **pool** specific parameters. These are powerful tools in the Bayesian kit. If you're in this course, you've hopefully studied generalization. In the machine learning world, L1 and L2 generalization are globally applied. That's just not adequate for mulitlevel enterprise scenarios. And these multiple levels will cluster in effects *(for example, in the scenario above, we might expect the effect of steel prices to be greater in EU locations than in Americas)*
+These sigmas also give us the ability to **generalize** and **pool** specific parameters. These are powerful tools in the Bayesian kit. If you're in this course, you've hopefully studied generalization. In the machine learning world, L1 and L2 generalization are globally applied. That's just not adequate for mulitlevel enterprise scenarios *(and almost ALL business scenarios are multilevel)*. And these multiple levels will cluster in effects *(for example, in the scenario above, we might expect the effect of steel prices to be greater in EU locations than in Americas)*
 
 ---
 
@@ -174,7 +174,7 @@ fit <- stan(model_code = stanMod, data = list(
   )
 ```
 
-The output shows the progress of 4 sampling chains *(Stan sets 4 chains with 2k iterations by default)*, and the parameters. A visual representation of the sampling can be created with a trace plot. Compare this with the description of how the sampler finds parameters above *(and you can see how our choice of prior sigmas constrains the sampler)*:
+The output shows the progress of 4 sampling chains *(Stan sets 4 chains with 2k iterations by default)*, and the parameters. A visual representation of the sampling can be created with a trace plot *(go back to Foundations.pptx / sampling, from class 1)*. Compare this with the description of how the sampler finds parameters above *(and you can see how our choice of prior sigmas constrains the sampler)*:
 
 ```{r, message=F, warning=F, fig.width=6, fig.height=2, fig.align="center"}
 # plot of sampling
@@ -224,7 +224,7 @@ The most comprehensive tool for diagnosing sampling is shinystan. I don't run th
 
 #### Perspective
 
-Sampling is a complex and fragile process. We're treating it as a "black box" here, but you will have to debug sampling, which means you'll need to have some intuition, built on hands-on experience and reading everything you can find. Diagnosis level expertise is art and science and requires commitment. This is No BS territory.
+Sampling is a complex and fragile process. We're treating it as a "black box" here, but you will have to debug sampling, which means you'll need to have some intuition, built on hands-on experience and reading everything you can find. Diagnosis level expertise is art and science and requires commitment. 
 
 --- 
 
