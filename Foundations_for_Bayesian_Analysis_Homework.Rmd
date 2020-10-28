@@ -1,0 +1,188 @@
+---
+title: "Foundations for Bayesian Analysis Homework"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(kableExtra)
+library(cowplot)
+library(ggExtra)
+library(sfsmisc)
+library(janitor)
+library(sn)
+
+```
+
+```{r, echo = F, message=F, warning=F, fig.width=6, fig.height=4, fig.align="center"}
+
+SalesTrans = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/Sales.csv")
+Location = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/Location.csv")
+MerGroup = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/MerGroup.csv")
+SalesTrans = SalesTrans %>% inner_join(Location, by = "LocationID")
+SalesTrans = SalesTrans %>% inner_join(MerGroup, by = "MerGroup")
+LocationID = as.factor(SalesTrans$LocationID)
+SalesTrans$ProductID = as.factor(SalesTrans$ProductID)
+SalesTrans$Description = as.factor(SalesTrans$Description)
+SalesTrans$MerGroup = as.factor(SalesTrans$MerGroup)
+
+# breaking out Q4 to simplify exercise
+
+SalesTrans$Qtr = quarter(SalesTrans$Tdate)
+SalesTrans = filter(SalesTrans, Qtr == 4)
+
+```
+
+```{r, echo = F, message=F, warning=F, fig.width=6, fig.height=4, fig.align="center"}
+SalesTransSummary = SalesTrans %>% 
+  group_by(Description, Population, MerGroup, MfgPromo, Wk ) %>% 
+  summarise(Volume = n(), TotSales = sum(Amount) )
+
+```
+### Data and EDA
+
+Load the data from last weeks homework *(Sales Transactions)*, and filter for Q4. Summarize by Description, Population, MerGroup, MfgPromo and Wk. Create a visualization of TotSales ~ Population Group *(converted to factor)*, as follows:
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+set.seed(222)
+
+SalesTransSummary$PopGrp = as.numeric(as.factor(SalesTransSummary$Population))
+
+# plot using ggextra format
+plot_center = ggplot(SalesTransSummary, aes(x=Population,y=TotSales, colour = factor(PopGrp))) + 
+  geom_point(width = .05) +
+  geom_smooth(method="lm", se = F) +
+  theme(panel.background = element_rect(fill = "white")) +  
+#  xlim(1, 8) + ylim(0, 10) + 
+  ylab("Sales") + xlab("Population")
+p1 = ggMarginal(plot_center, type="density", groupColour = FALSE, groupFill = TRUE)
+p1
+```
+Now show sales distributions by Population Group:  
+```{r, echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+p2 = ggplot(SalesTransSummary, aes(x = TotSales, fill = factor(PopGrp))) + 
+  geom_density(bw = 25000, alpha = .2) +
+#  xlim(-10, 40)  +
+  theme(panel.background = element_rect(fill = "white")) 
+p2
+
+```
+*(note: this is not a normal distribution - take a look at the sn package)*
+
+# Deliverables:
+
+1. Posterior distributions for TotSales:  Unconditional, and Population Groups 5 and 10. 
+
+```{r, echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+#mod = lm(TotSales~Population, data = SalesTransSummary)
+
+
+PopModel <- sn.mple(y = SalesTransSummary$TotSales, opt.method = "nlminb")$cp
+# get values
+PopParameters <- cp2dp(PopModel, family = "SN")
+# put parameters in variables
+exi <- PopParameters[1] # location
+eomega <- PopParameters[2] # scale
+ealpha <- PopParameters[3] # shape
+#prob = psn(muY, xi=exi, omega=eomega, alpha=ealpha)
+
+N = nrow(SalesTransSummary)
+
+denPopModel = dsn(SalesTransSummary$TotSales, exi, eomega, ealpha)
+
+Pop2Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 5)$TotSales, opt.method = "nlminb")$cp
+# get values
+Pop2Parameters <- cp2dp(Pop2Model, family = "SN")
+# put parameters in variables
+exi2 <- Pop2Parameters[1] # location
+eomega2 <- Pop2Parameters[2] # scale
+ealpha2 <- Pop2Parameters[3] # shape
+#prob2 = psn(muY, xi=exi2, omega=eomega2, alpha=ealpha2)
+
+denPop2Model = dsn(SalesTransSummary$TotSales, exi2, eomega2, ealpha2)
+
+Pop6Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 10)$TotSales, opt.method = "nlminb")$cp
+# get values
+Pop6Parameters <- cp2dp(Pop6Model, family = "SN")
+# put parameters in variables
+exi6 <- Pop6Parameters[1] # location
+eomega6 <- Pop6Parameters[2] # scale
+ealpha6 <- Pop6Parameters[3] # shape
+#prob6 = psn(muY, xi=exi6, omega=eomega6, alpha=ealpha6)
+
+denPop6Model = dsn(SalesTransSummary$TotSales, exi6, eomega6, ealpha6)
+
+post2  = denPop2Model*denPopModel
+#post2 = post2/sum(post2)
+#sum(post2)
+
+post2Model <- sn.mple(y = post2, opt.method = "nlminb")$cp
+# get values
+Post2Parameters <- cp2dp(post2Model, family = "SN")
+# put parameters in variables
+exiPost2 <- Post2Parameters[1] # location
+eomegaPost2 <- Post2Parameters[2] # scale
+ealphaPost2 <- Post2Parameters[3] # shape
+#prob2 = psn(muY, xi=exi2, omega=eomega2, alpha=ealpha2)
+
+
+
+post6  = denPop6Model*denPopModel
+Pop6Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 10)$TotSales, opt.method = "nlminb")$cp
+# get values
+Pop6Parameters <- cp2dp(Pop6Model, family = "SN")
+# put parameters in variables
+exiPost6 <- Pop6Parameters[1] # location
+eomegaPost6 <- Pop6Parameters[2] # scale
+ealphaPost6 <- Pop6Parameters[3] # shape
+#prob6 = psn(muY, xi=exi6, omega=eomega6, alpha=ealpha6)
+
+denPostModel = data.frame(x = SalesTransSummary$TotSales)
+denPostModel$y2 = dsn(SalesTransSummary$TotSales, exiPost2, eomegaPost2, ealphaPost2)
+denPostModel$y6 = dsn(SalesTransSummary$TotSales, exiPost6, eomegaPost6, ealphaPost6)
+
+
+```
+
+```{r,  echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+#postPlots = ggplot(denPostModel, aes(x, y2)) + 
+#  geom_line(color = "blue") +
+#  geom_line(aes(y = y6), color = "red") +
+#  theme(panel.background = element_rect(fill = "white"))
+#postPlots
+
+
+
+```
+2. Determine probablity of a weekly sales exceeding 10,000 in groups 2 and 6
+
+
+```{r,  echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+p2 = (1 - psn(10000, exi2, eomega2, ealpha2))
+p6 = (1 - psn(10000, exi6, eomega6, ealpha6))
+
+dfComp = data.frame(Description = c("PopGrp = 2", "PopGrp = 6"),
+Prob = c(p2, p6
+))
+
+#knitr::kable(dfComp) %>%
+#  kable_styling(full_width = F, bootstrap_options = "striped", font_size = 9)
+
+
+
+```
+
+
+
+

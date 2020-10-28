@@ -1,0 +1,257 @@
+---
+title: "1-1 Introduction to Bayesian Modeling - Homework"
+subtitle: "Distributions"
+output: pdf_document
+---
+
+## Audit Scenario - Substantive Testing
+
+You're an audit manager planning and enagement and you have last years *(2012)* transaction data. You want to pull a sample from the top 10% *(transamt)* for 2013, but you need to adjust the distribution to reflect an increase of 20% in prices.
+
+>Note that 2013 transactions have not been completed yet - you're in planning. 
+
+### Normally Distributed Transactions
+
+Load the following libraries:
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=T}
+
+library(tidyverse)
+library(lubridate)
+library(rstan)
+library(sn)
+
+```
+
+Read the b1012n.csv file, and create a visual of the distribution:
+
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=F}
+# convert dates
+
+b2012 = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Bayes Intrro/b1012n.csv")
+
+# quick look
+ggplot(b2012, aes(x = BilledAmt))+ 
+  geom_density(alpha = .2, bw = 10, fill = "red") +
+  theme(panel.background = element_rect(fill = "white")) 
+
+```
+
+Now, Build a model that will create a posterior distibution that considers a high confidence in price increases. 
+
+1. Show the distibution of 2012 transactions, and the posterior distribution.  
+
+2. Determine the number of transactions that need to be sampled to include the top 10%.  
+
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=F}
+
+stanMod <- '
+data {
+  int N;
+  vector[N] y;
+  real mu_mu;
+  real<lower=0> mu_sigma;
+  real sigma_mu;
+  real<lower=0> sigma_sigma;
+}
+parameters {
+  real mu;
+  real<lower=0> sigma;
+}
+model {
+  target += normal_lpdf(y | mu, sigma);
+  target += normal_lpdf(mu | mu_mu, mu_sigma);
+  target += normal_lpdf(sigma | sigma_mu, sigma_sigma);
+}
+'
+
+N2012 = nrow(b2012)
+
+priorMu <- 60
+priorMuSigma = .2
+priorSigma <- 20
+priorSigmaSigma = 10
+
+
+fit <- stan(model_code = stanMod, 
+            data = list(y = b2012$BilledAmt, 
+                        mu_mu = priorMu, 
+                        mu_sigma = priorMuSigma, 
+                        sigma_mu = priorSigma, 
+                        sigma_sigma = priorSigmaSigma, 
+                        N = nrow(b2012)), refresh = 0)
+
+
+sumFit <- data.frame(summary(fit))
+mu <- summary(fit, pars = c("mu"), probs = c(0.1, 0.9))$summary[1]
+sigma <- summary(fit, pars = c("sigma"), probs = c(0.1, 0.9))$summary[1]
+
+x = seq(from = 0, to = 100, length.out = 100)
+dfNorm <- data.frame(x=x, prior = dnorm(x, 50 ,20),
+                     posterior = dnorm(x, mu, sigma)) 
+
+p <- ggplot(data = dfNorm, aes(x, prior)) + 
+  geom_line(color = "blue") +   
+  geom_line(aes(x, posterior), color = "red") +   
+  theme(panel.background = element_rect(fill = "white"))  +
+  ylab("Density")
+p
+
+sampleLimit = qnorm(0.90, 50, 20)      
+sampleN = b2012 %>% filter(b2012$BilledAmt > sampleLimit) %>% summarise(Cnt = n())
+
+```
+
+
+### Skew Normal
+
+Now, read the b1012sn.csv file, and create a visual of the distribution:
+
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=F}
+
+b2012 = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Bayes Intrro/b1012sn.csv")
+
+# quick look
+ggplot(b2012, aes(x = BilledAmt))+ 
+  geom_density(alpha = .2, bw = 5, fill = "red") +
+  theme(panel.background = element_rect(fill = "white")) 
+
+```
+Assuming the same price increase as above:
+
+1. Show the distibution of 2012 transactions, and the posterior distribution.  
+
+2. Determine the number of transactions that need to be sampled to include the top 10%.  
+
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=F}
+
+
+
+stanMod <- '
+data {
+  int N;
+  vector[N] y;
+  real xi_mu;
+  real<lower=0> xi_sigma;
+  real omega_mu;
+  real<lower=0> omega_sigma;
+  real alpha_mu;
+  real<lower=0> alpha_sigma;
+}
+parameters {
+  real xi;
+  real<lower=0> omega;
+  real alpha;
+}
+model {
+  target += skew_normal_lpdf(y | xi, omega, alpha);
+  target += normal_lpdf(xi | xi_mu, xi_sigma);
+  target += normal_lpdf(omega | omega_mu, omega_sigma);
+  target += normal_lpdf(alpha | alpha_mu, alpha_sigma);
+}
+'
+
+priorLocat <- 60
+xiSigma = .2
+
+priorScale <- 20
+omegaSigma = .2
+
+priorSkew <-  10
+alphaSigma = .2
+
+
+fit <- stan(model_code = stanMod, 
+            data = list(y = b2012$BilledAmt, 
+                        xi_mu = priorLocat, 
+                        xi_sigma = xiSigma, 
+                        omega_mu = priorScale, 
+                        omega_sigma = omegaSigma, 
+                        alpha_mu = priorSkew, 
+                        alpha_sigma = alphaSigma, 
+                        N = nrow(b2012)), refresh = 0)
+
+```
+
+
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=F}
+
+sumFit <- data.frame(summary(fit))
+xi <- summary(fit, pars = c("xi"), probs = c(0.1, 0.9))$summary[1]
+omega <- summary(fit, pars = c("omega"), probs = c(0.1, 0.9))$summary[1]
+alpha <- summary(fit, pars = c("alpha"), probs = c(0.1, 0.9))$summary[1]
+
+x = seq(from = 0, to = 100, length.out = 150)
+dfSN <- data.frame(x=x, prior = dsn(x, 50 ,20, 10),
+                     posterior = dsn(x, xi, omega, alpha)) 
+
+p <- ggplot(data = dfSN, aes(x, prior)) + 
+  geom_line(color = "blue") +   
+  geom_line(aes(x, posterior), color = "red") +   
+  theme(panel.background = element_rect(fill = "white"))  +
+  ylab("Density")
+p
+
+sampleLimitSN = qsn(0.90, xi = xi, omega = omega, alpha = alpha)      
+
+sampleSN = b2012 %>% filter(b2012$BilledAmt > sampleLimit) %>% summarise(Cnt = n())
+
+
+```
+
+Show your work.
+
+*(Note: just for reference, I got a cut of 75 with the normal, and a cut of 88 with the skew normal, for samplesizes of 106 and 203 respectively.)* 
+
+### Control Testing
+
+Your substantive testing relies on your test of controls. Last year, out of 200 samples in the top 10%, 20 failed a test of controls. You take a small sample of transactions from H1 *(which has been completed)*, and you find that 12 out of 110 fail control tests. 
+
+Create a plot showing the prior, likelihood and posterior distributions *(shown below)* and compute the expected failure rate for each distribution:
+
+```{r, message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=F}
+
+
+priora <- 20
+priorb <- 180
+bgrid = seq(from = 0, to = .2, length.out = 100)
+dfBeta <- data.frame(x <- bgrid, db = dbeta(bgrid, priora, priorb)) 
+dfBeta$db <- dfBeta$db/sum(dfBeta$db) # normalize 
+
+p1 <- ggplot(data = dfBeta, aes(x, db)) + 
+  geom_line() +
+  ylab("Probability") +
+  theme(panel.background = element_rect(fill = "white")) 
+
+a = (12)
+b = (98)
+
+dfBeta <- data.frame(x <- bgrid, like = dbeta(bgrid, a, b)) 
+dfBeta$like <- dfBeta$like/sum(dfBeta$like) # standardize 
+
+p1 <- p1 + 
+  geom_line(data = dfBeta, aes(x, like), color = "blue") +
+  ylab("Probability") +
+  theme(panel.background = element_rect(fill = "white")) 
+
+
+posta = (20 + 12)
+postb = (180 + 98)
+
+dfBeta <- data.frame(x <- bgrid, post = dbeta(bgrid, posta, postb)) 
+dfBeta$post <- dfBeta$post/sum(dfBeta$post) # standardize 
+
+p1 <- p1 + 
+  geom_line(data = dfBeta, aes(x, post), color = "red") +
+  ylab("Probability") +
+  theme(panel.background = element_rect(fill = "white")) 
+p1
+
+
+#priora/(priora+priorb)
+#a/(a+b)
+#((priora+a)/(priora+a+priorb+b))
+
+
+
+```
+
