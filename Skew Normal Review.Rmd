@@ -1,0 +1,116 @@
+---
+title: "Skew Normal Review"
+output: pdf_document
+---
+
+Most intro Stat courses skip analysis of skewed distributions. Unfortunately, MOST distributions in transaction environments are skewed and force fitting normal distributions on top make for severely flawed analyses. 
+
+The skew normal distribution is implemented in R with the sn package (documentation here: https://cran.r-project.org/web/packages/sn/sn.pdf) and a review of the distribution and density functions are described here: http://azzalini.stat.unipd.it/SN/ . The following is an introductory exercise:
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Quick Review of Skew Normal Distribution
+
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(kableExtra)
+library(cowplot)
+library(ggExtra)
+library(sfsmisc)
+library(janitor)
+library(sn)
+
+```
+
+Load the following data *(from your last class)*
+
+```{r, message=F, warning=F, fig.width=6, fig.height=4, fig.align="center"}
+
+SalesTrans = 
+  read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/Sales.csv")
+Location = 
+  read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/Location.csv")
+MerGroup = 
+  read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/MerGroup.csv")
+SalesTrans = SalesTrans %>% inner_join(Location, by = "LocationID")
+SalesTrans = SalesTrans %>% inner_join(MerGroup, by = "MerGroup")
+LocationID = as.factor(SalesTrans$LocationID)
+SalesTrans$ProductID = as.factor(SalesTrans$ProductID)
+SalesTrans$Description = as.factor(SalesTrans$Description)
+SalesTrans$MerGroup = as.factor(SalesTrans$MerGroup)
+
+SalesTransSummary = SalesTrans %>% 
+  group_by(Description, MerGroup, MfgPromo, Wk ) %>% 
+  summarise(Volume = n(), TotSales = sum(Amount) )
+
+```
+
+Now, using geom_density *(which uses a non-parametric kernel estimate of the density function)*, plot the estimated density:
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+p = ggplot(SalesTransSummary, aes(Volume)) + geom_density(bw = 15) +
+  theme(axis.text.y=element_blank(),axis.ticks=element_blank(),
+        panel.background = element_rect(fill = "white"))
+
+p
+
+```
+Now, let's compare the the kernel estimate with a normal distribution simulated from the estimated parameters *(mean and standard deviation)*:
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+
+p = p + geom_density(aes(x  = rnorm(mean = 50, sd = 35, n = nrow(SalesTransSummary))), bw = 15, color = "red")
+p
+
+```
+Now, let's add an skew normal distribution simulated from estimated parameters *(location - xi, scale - omega, and skew - alpha)*. Use sn to estimate as follows:
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+estMod <- sn.mple(y = SalesTransSummary$Volume, opt.method = "nlminb")$cp
+estParam <- cp2dp(estMod, family = "SN")
+
+exi <- estParam[1]
+eomega <- estParam[2]
+ealpha <- estParam[3]
+
+p = p + geom_density(aes(x  = rsn(xi = exi, omega = eomega, alpha = ealpha, n = nrow(SalesTransSummary))), bw = 15, color = "blue")
+p
+
+```
+Now that we have these, let's estimate the probability of a locatiion / group volume exceeding 100 in any week *(say, we want to test transactions for compliance)*. Visualize the threshold:
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+
+p = p + geom_vline(xintercept = 100)
+p
+
+```
+
+Now, compare estimate based on normal distribution vs skew normal:
+
+```{r, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center", echo=T}
+
+round(1- (pnorm(100, mean = mean(SalesTransSummary$Volume), sd = sd(SalesTransSummary$Volume))),2)
+
+
+round(1 - psn(100, xi = exi, omega = eomega, alpha = ealpha),2)
+
+```
+So the skew normal estimates that there is a 7% probability of volume exceeding 100/wk and normal estimated a 6% probability. May not seem like much but that translates to 40 additional observations that can cause thresholds to kick in or affect assurance work.
+
+Also, keep in mind, this is a *VERY* low volume sample - most transactions environments do this volume every seconds. AND most transaction environments have a far heavier skew *(larger values of omega and alpha)*, so this difference becomes very significant in the real world.
+
+
+
+
+
+
