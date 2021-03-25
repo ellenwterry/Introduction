@@ -1,0 +1,253 @@
+---
+title: "Foundations for Bayesian Analysis Homework"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(kableExtra)
+library(cowplot)
+library(ggExtra)
+library(sfsmisc)
+library(janitor)
+library(sn)
+
+```
+
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+SalesTrans = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/Sales.csv")
+Location = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/Location.csv")
+MerGroup = read_csv("C:/Users/ellen/Documents/UH/Fall 2020/Class Materials/Section II/Class 1/Data/MerGroup.csv")
+SalesTrans = SalesTrans %>% inner_join(Location, by = "LocationID")
+SalesTrans = SalesTrans %>% inner_join(MerGroup, by = "MerGroup")
+LocationID = as.factor(SalesTrans$LocationID)
+SalesTrans$ProductID = as.factor(SalesTrans$ProductID)
+SalesTrans$Description = as.factor(SalesTrans$Description)
+SalesTrans$MerGroup = as.factor(SalesTrans$MerGroup)
+
+# breaking out Q4 to simplify exercise
+
+SalesTrans$Qtr = quarter(SalesTrans$Tdate)
+SalesTrans = filter(SalesTrans, Qtr == 4)
+
+```
+
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+SalesTransSummary = SalesTrans %>% 
+  group_by(Description, Population, MerGroup, MfgPromo, Wk ) %>% 
+  summarise(Volume = n(), TotSales = sum(Amount) )
+
+```
+### Data and EDA
+
+Load the data from last week  *(Sales Transactions)*, and filter for Q4. Summarize by Description, Population, MerGroup, MfgPromo and Wk. Create a visualization of TotSales ~ Population Group *(converted to factor)*, as follows:
+```{r, echo = F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+set.seed(222)
+
+SalesTransSummary$PopGrp = as.numeric(as.factor(SalesTransSummary$Population))
+
+# plot using ggextra format
+plot_center = ggplot(SalesTransSummary, aes(x=Population,y=TotSales, colour = factor(PopGrp))) + 
+  geom_point(width = .05) +
+  geom_smooth(method="lm", se = F) +
+  theme(panel.background = element_rect(fill = "white")) +  
+#  xlim(1, 8) + ylim(0, 10) + 
+  ylab("Sales") + xlab("Population")
+p1 = ggMarginal(plot_center, type="density", groupColour = FALSE, groupFill = TRUE)
+p1
+```
+Now show sales distributions by Population Group:  
+
+```{r, echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+p2 = ggplot(SalesTransSummary, aes(x = TotSales, fill = factor(PopGrp))) + 
+  geom_density(bw = 25000, alpha = .2) +
+  xlim(-20000, 200000)  +
+  theme(panel.background = element_rect(fill = "white")) 
+p2
+
+```
+*(note: this is not a normal distribution - take a look at the sn package)*
+
+# Deliverables:
+
+1. Posterior distributions for TotSales: Population Groups 5 and 10. 
+
+```{r, echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+# get parameters for total population (use that for prior)
+PopModel <- sn.mple(y = SalesTransSummary$TotSales, opt.method = "nlminb")$cp
+PopParameters <- cp2dp(PopModel, family = "SN")
+exi <- PopParameters[1] # location
+eomega <- PopParameters[2] # scale
+ealpha <- PopParameters[3] # shape
+denPrior = dsn(SalesTransSummary$TotSales, exi, eomega, ealpha)
+
+# create densities for pop group 5:
+
+Pop5Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 5)$TotSales, opt.method = "nlminb")$cp
+Pop5Parameters <- cp2dp(Pop5Model, family = "SN")
+exi5 <- Pop5Parameters[1] # location
+eomega5 <- Pop5Parameters[2] # scale
+ealpha5 <- Pop5Parameters[3] # shape
+denLike5 = dsn(SalesTransSummary$TotSales, exi5, eomega5, ealpha5)
+
+# create posterior
+post5  = denLike5*denPrior
+# normalize
+post5   <- post5/sum(post5)
+sum(post5)
+
+
+
+#N = nrow(SalesTransSummary)
+
+Pop10Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 10)$TotSales, opt.method = "nlminb")$cp
+Pop10Parameters <- cp2dp(Pop10Model, family = "SN")
+exi10 <- Pop10Parameters[1] # location
+eomega10 <- Pop10Parameters[2] # scale
+ealpha10 <- Pop10Parameters[3] # shape
+denLike10 = dsn(SalesTransSummary$TotSales, exi10, eomega10, ealpha10)
+
+post10  = denLike10*denPrior
+# normalize
+post10   <- post10/sum(post10)
+sum(post10)
+
+
+# normalize likelihoods
+denLike5   <- denLike5/sum(denLike5)
+sum(denLike5)
+denLike10   <- denLike10/sum(denLike10)
+sum(denLike10)
+
+
+p3 = ggplot(SalesTransSummary, aes(x = TotSales, y = denLike5)) + 
+  geom_line() +
+  geom_line(aes(x = TotSales, y = post5), color = "blue") +
+  geom_line(aes(x = TotSales, y = denLike10), color = "black") +
+  geom_line(aes(x = TotSales, y = post10), color = "red") +
+  xlim(0, 100000)  +
+  theme(panel.background = element_rect(fill = "white")) 
+p3
+
+
+```
+2. Determine probablity of a weekly sales exceeding 20,000 in groups 2 and 6
+
+
+Take a look at densities:
+```{r, echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+# create densities for pop group 2:
+
+Pop2Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 2)$TotSales, opt.method = "nlminb")$cp
+Pop2Parameters <- cp2dp(Pop5Model, family = "SN")
+exi2 <- Pop2Parameters[1] # location
+eomega2 <- Pop2Parameters[2] # scale
+ealpha2 <- Pop2Parameters[3] # shape
+denLike2 = dsn(SalesTransSummary$TotSales, exi2, eomega2, ealpha2)
+
+# create posterior
+post2  = denLike2*denPrior
+# normalize
+post2   <- post2/sum(post2)
+#sum(post2)
+
+
+
+#N = nrow(SalesTransSummary)
+
+Pop6Model <- sn.mple(y = filter(SalesTransSummary, PopGrp == 6)$TotSales, opt.method = "nlminb")$cp
+Pop6Parameters <- cp2dp(Pop10Model, family = "SN")
+exi6 <- Pop6Parameters[1] # location
+eomega6 <- Pop6Parameters[2] # scale
+ealpha6 <- Pop6Parameters[3] # shape
+denLike6 = dsn(SalesTransSummary$TotSales, exi6, eomega6, ealpha6)
+
+post6  = denLike10*denPrior
+# normalize
+post6   <- post6/sum(post6)
+#sum(post6)
+
+
+# normalize likelihoods
+denLike2   <- denLike2/sum(denLike2)
+#sum(denLike2)
+denLike6   <- denLike6/sum(denLike6)
+#sum(denLike6)
+
+
+p3 = ggplot(SalesTransSummary, aes(x = TotSales, y = denLike2)) + 
+  geom_line() +
+  geom_line(aes(x = TotSales, y = post2), color = "blue") +
+  geom_line(aes(x = TotSales, y = denLike6), color = "black") +
+  geom_line(aes(x = TotSales, y = post6), color = "red") +
+  xlim(0, 100000)  +
+  theme(panel.background = element_rect(fill = "white")) 
+p3
+
+
+```
+Create simulations:
+
+```{r,  echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+# generate some simulations
+
+SalesSim2 = data.frame(Sales = rep(SalesTransSummary$TotSales,times = as.integer(post2*10000)))
+
+p3 = ggplot(SalesSim2, aes(x = Sales)) + 
+  geom_histogram(fill = "blue", alpha = .2, binwidth = 2000) +
+  theme(panel.background = element_rect(fill = "white")) 
+
+SalesSim6 = data.frame(Sales = rep(SalesTransSummary$TotSales,times = as.integer(post6*10000)))
+
+p3 = p3 + 
+  geom_histogram(data = SalesSim6, aes(x = Sales), fill = "red", alpha = .2, binwidth = 2000) +
+  theme(panel.background = element_rect(fill = "white")) 
+p3
+
+```
+Get parameters and run probability functions:
+
+
+```{r,  echo=F, message=F, warning=F, fig.width=5, fig.height=3, fig.align="center"}
+
+Post2Model <- sn.mple(y = SalesSim2$Sales, opt.method = "nlminb")$cp
+Post2Parameters <- cp2dp(Post2Model, family = "SN")
+postxi2 <- Post2Parameters[1] # location
+postomega2 <- Post2Parameters[2] # scale
+postalpha2 <- Post2Parameters[3] # shape
+
+Post6Model <- sn.mple(y = SalesSim6$Sales, opt.method = "nlminb")$cp
+Post6Parameters <- cp2dp(Post6Model, family = "SN")
+postxi6 <- Post6Parameters[1] # location
+postomega6 <- Post6Parameters[2] # scale
+postalpha6 <- Post6Parameters[3] # shape
+
+p2 = (1 - psn(20000, postxi2, postomega2, postalpha2))
+p6 = (1 - psn(20000, postxi6, postomega6, postalpha6))
+
+dfComp = data.frame(Description = c("PopGrp = 2", "PopGrp = 6"),
+Prob = c(p2, p6
+))
+
+dfComp
+
+# levelset on neg sales
+
+```
+
+
+
+
