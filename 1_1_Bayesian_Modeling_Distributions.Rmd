@@ -35,6 +35,7 @@ First, load the following libraries:
 
 library(tidyverse)
 library(rstan)
+rstan_options(auto_write = TRUE)
 library(sn)
 ```
 
@@ -135,7 +136,7 @@ This Stan model has 3 sections data, parameters, and model *(there are more sect
 
 * **parameters**. The parameters section is where we define the parameters we want the sampler to track - we'll get an estimate for each one. When defining scale parameters, be sure and use "real<lower=0> sigma" syntax, because a scale parameter can't be negative - otherwise you give the sampler permission to wander around looking for a negative sigmas, and that's not going to end well *(samplers are drunk)*!
 
-* **model**.  The model section is where we tell the sampler how it all fits together. To get a parameter into the sampling process, we add it to the target log probability density function  *(using target += )*, and define the distribution *(e.g., using normal_lpdf for normal log density - there are a TON of options for distributions - RTFM)*. Looking at the statements in the model section:  
+* **model**.  The model section is where we tell the sampler how it all fits together. To get a parameter into the sampling process, we add it to the target log probability density function  *(using target += )*, and define the distribution *(e.g., using normal_lpdf for normal log density - there are a TON of options for distributions - see Stan function reference https://mc-stan.org/docs/2_18/functions-reference/index.html )*. Looking at the statements in the model section:  
 
 >target += normal_lpdf(y | mu, sigma); This statement fits a normal distribution to the likelihood data (y). y is conditioned on mu and sigma, and from there draws samples into the posterior target.  
 
@@ -430,7 +431,7 @@ d_bin <- list(
   priorB = b)
 
 # fit_bin <- stan(model_code = model_string, data = d_bin)
-fit_bin <- stan(model_code = model_string, data = d_bin, refresh = 0) # doesn't show ouput
+fit_bin <- stan(model_code = model_string, data = d_bin, refresh = 0) # doesn't show output
 print(fit_bin,digits=2)
 
 sumFit <- summary(fit_bin)
@@ -519,11 +520,14 @@ model {
   target += normal_lpdf(alpha | alpha_mu, alpha_sigma);
 }
 '
+
+
 locat <- 1
 scale <- 3
 skew <- 10
 N = 100
-y <- rsn( N , xi= locat, omega= scale , alpha= skew ) # using data sample now
+
+y <- rsn(N, xi = locat, omega = scale, alpha = skew) # using data sample now
 
 mod <- stan_model(model_code = stanMod)
 
@@ -579,6 +583,33 @@ Bayesian analysis is an established tool and most Data Science groups will expec
 
 ## Homework
 
-1. Create an R file that walks through the 3 scenarios, but use your own parameters *(different from mine - no copy and paste - THINK through it, try different values and see how it affects the outcome)*  
-2. Include conclusions and comments in the file  
-3. Make sure it runs end-to-end. I'm not debugging - no run, no credit.  
+Using the following code:
+
+```{r, eval=FALSE,  message=F, warning=F, fig.width=3, fig.height=2, fig.align="center", echo=T}
+
+
+priorXi  = 50
+priorOmega = 50
+priorAlpha = 20
+
+y = rsn(n = 1000, xi = 100, omega = 100, alpha = 10)
+N = length(y)
+
+mod <- stan_model(model_code = stanMod)
+
+fit <- stan(model_code = stanMod, 
+            data = list(y = y, 
+                        xi_mu = priorXi, 
+                        xi_sigma = 20, 
+                        omega_mu = priorOmega, 
+                        omega_sigma = 20, 
+                        alpha_mu = priorAlpha, 
+                        alpha_sigma = 10, 
+                        N = N))
+
+#print(fit)
+
+
+```
+
+Vary the values in the priors and sigmas, as well as the distributions generated from rsn, and note the changes to the estimated posteriror parameters, paying close attention to the affect of sigma variation. Prepare to discuss in class.
