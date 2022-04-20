@@ -1,8 +1,8 @@
-### Bayesian Analysis for Forecasting, Planning and Assurance
+### Bayesian Modeling in Markets, Operations and Analysis 
 
 ------
 
-These repositories support **Bayesian Analysis for Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+These repositories support **Bayesian Modeling in Markets, Operations and Analysis** course at the **HP Enterprise Data Science Institute** and **Bauer Graduate Business School**.
 
 ------
 
@@ -38,6 +38,8 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Ellen Terry
 
-Ellen Terry began her career in M&A analysis at Deloitte, developing econometric models for industry forecasting and valuation, later transitioning to Post Merger Integration *(PMI)*. She worked with Microsoft on a PMI project segment (enterprise application integration), fell in love with the company, and joined Microsoft to lead development of industry solutions *(cross platform templates)*, and  implementation, leveraging partner channels. Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP Data Science. She's currently a Professor of Practice at Bauer, and an independent consultant/mentor to planning and assurance groups.   
+Ellen Terry began her career in M&A consulting at Deloitte, developing econometric models for industry forecasting and valuation. She then worked with Microsoft for a decade, leading development and implementation of industry solutions and models, working with Microsoft Research, the Santa Fe Institute, Accenture and EY.  
+
+Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP Data Science. She's currently a Professor of Practice and an independent consultant.   
 
 ------
