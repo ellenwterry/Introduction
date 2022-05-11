@@ -1,4 +1,4 @@
-### Bayesian Modeling in Markets, Operations and Analysis 
+### Bayesian Analysis and Causality 
 
 ------
 
@@ -38,7 +38,7 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Ellen Terry
 
-Ellen Terry began her career in M&A consulting at Deloitte, developing econometric models for industry forecasting and valuation. She then worked with Microsoft for a decade, leading development and implementation of industry solutions and models, working with Microsoft Research, the Santa Fe Institute, Accenture and EY.  
+Ellen Terry began her career in M&A consulting at Deloitte, developing econometric models for industry forecasting and valuation. She then worked for Microsoft, leading development and implementation of industry solutions and models and working with Microsoft Research at the Santa Fe Institute. 
 
 Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP Data Science. She's currently a Professor of Practice and an independent consultant.   
 
