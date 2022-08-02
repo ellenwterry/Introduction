@@ -1,16 +1,12 @@
-### Bayesian Analysis and Causality 
+### Bayesian Analysis for Forecasting, Planning and Assurance
 
 ------
 
-These repositories support **Bayesian Modeling in Markets, Operations and Analysis** course at the **HP Enterprise Data Science Institute** and **Bauer Graduate Business School**.
+These repositories support **Bayesian Analysis for Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
 
 ------
 
-Forecasting, Analysis, Planning, and Assurance should be based on consistent models and metrics throughout: Forecasting provides a basis for planning *(which produces a budget approved by the board)*, which becomes a basis for assurance and testing. 
-
-Enterprises operate in an ecosphere that is complex, dynamic and often ambiguous. Analyses should, at a minimum, comprehend: markets, customers, competitors, suppliers, and other relevant drivers *(economic drivers are factors that have a significant* **effect** *on the activity of an enterprise - i.e., they* **cause** *changes in enterprise activity and performance)*. Identification and integration of latent business drivers is a pursuit with a long history: from Aristotle *("Prior Analytics")*, to the first business intelligence channels described in the "Cyclopaedia of Commercial and Business Anecdotes" in 1865, to Sam Walton flying over parking lots to count cars in 1950, to NLP and GPS applications searching social media and satellite images for clues to emerging trends *(note: read  JP Morgan's "Global Quantitative & Derivatives Strategy" provided)*, to modeling of customer sentiments from social media. Understanding how drivers affect business performance is key to forecasting, realizing competitive advantage and performance potential, and also performing efficient assurance and audit work *(the more independent, external drivers are integrated into assurance models, the less substantive validation is required and more independence the opinion)*. So, We're concerned with what *causes* something to happen, and how to **integrate ambiguous, latent drivers into models that can be used to understand business performance**. This requires reason, experience, intuition and judgment. Technology does not provide substitutes for these human capabilities - and overreliance on technology tends to result in poor analyses. Understanding first *(which is why we focus on case studies)*. 
-
-And as we build understading of business drivers and models, our goal is to build competency in Bayesian methodologies, where driver integration is explicitly structured, and data / parameters are disambiguated and validated through model evolution. The benefits of Bayesian analysis to planning and assurance include:  
+Enterprises operate in an ecosphere that is complex, dynamic and often ambiguous. Analyses often must comprehend: markets, customers, competitors, suppliers, and other relevant drivers *(economic drivers are factors that have a significant* **effect** *on the activity of an enterprise - i.e., they* **cause** *changes in enterprise activity and performance)*, so we must comprehend these drivers and causation in our models. And as we build models, our goal is to build competency in Bayesian methodologies, where driver integration is explicitly structured, and data / parameters are quantified and validated throughout model evolution. The benefits of Bayesian analysis to planning and assurance include:  
 
 * **Integration of Experience and Evidence** Business planning often begins with industry trends, opportunities and threats, competitor capabilities and capacity, brand loyalty and price sensitivity, intuition of experienced managers, etc. This data can be integrated with operational data into probabilistic models. 
 
@@ -38,8 +34,6 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Ellen Terry
 
-Ellen Terry began her career in M&A consulting at Deloitte, developing econometric models for industry forecasting and valuation. She then worked for Microsoft, leading development and implementation of industry solutions and models and working with Microsoft Research at the Santa Fe Institute. 
-
-Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP Data Science. She's currently a Professor of Practice and an independent consultant.   
+Ellen Terry began her career in M&A analysis at Deloitte, developing econometric models for industry forecasting and valuation, later transitioning to Post Merger Integration *(PMI)*. She worked with Microsoft on a PMI project segment (enterprise application integration), fell in love with the company, and joined Microsoft to lead development of industry solutions *(cross platform templates)*, and  implementation, leveraging partner channels. Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP Data Science. She's currently a Professor of Practice at Bauer, and an independent consultant/mentor to planning and assurance groups.   
 
 ------
