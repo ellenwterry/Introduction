@@ -6,7 +6,7 @@ These repositories support the **Bayesian Analysis for Forecasting, Planning and
 
 ------
 
-Enterprises operate in an economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, including customers, competitors, suppliers, products, and many other drivers *(drivers are variables that have a significant* **effect** *on the outcome of an enterprise - i.e., they* **cause** *change in enterprise activity and performance)*. 
+Enterprises operate in an economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, considering customer, competitor, supplier, product, and many other drivers *(drivers are variables that have a significant* **effect** *on the outcome of an enterprise - i.e., they* **cause** *change in enterprise activity and performance)*. 
 
 
 Data environments range from structured and consistent databases, to unstructured and ambiguous data lakes to expert opinion.  Regardless of data quality, analysts must build models for understanding and decision-making that comprehends all the relevant variables and evaluates their relevance and reliablity.
