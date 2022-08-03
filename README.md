@@ -2,21 +2,26 @@
 
 ------
 
-These repositories support **Bayesian Analysis for Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+These repositories support the **Bayesian Analysis for Forecasting, Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
 
 ------
 
-Enterprises operate in an ecosphere that is complex, dynamic and often ambiguous. Analyses often must comprehend: markets, customers, competitors, suppliers, and other relevant drivers *(economic drivers are factors that have a significant* **effect** *on the activity of an enterprise - i.e., they* **cause** *changes in enterprise activity and performance)*, so we must comprehend these drivers and causation in our models. And as we build models, our goal is to build competency in Bayesian methodologies, where driver integration is explicitly structured, and data / parameters are quantified and validated throughout model evolution. The benefits of Bayesian analysis to planning and assurance include:  
+Enterprises operate in a economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, including customers, competitors, suppliers, products, and many other drivers *(drivers are variables that have a significant* **effect** *on the outcome of an enterprise - i.e., they* **cause** *change in enterprise activity and performance)*. 
 
-* **Integration of Experience and Evidence** Business planning often begins with industry trends, opportunities and threats, competitor capabilities and capacity, brand loyalty and price sensitivity, intuition of experienced managers, etc. This data can be integrated with operational data into probabilistic models. 
 
-* **Explanatory Parameters** The models produce projections and parameters with probabilities that people can understand and use - i.e., they're explanatory.  
+Data environments range from structured and consistent databases, to unstructured and ambiguous data lakes to expert opinion.  Regardless of data quality, analysts must build models for understanding and decision-making that comprehends all the relevant variables and evaluates their relevance and reliablity.
 
-* **Multilevel Analysis with Effects** Business value-chains and transaction environments are almost always multilevel *(either hierarchical or crossed effects)*. These effects are quantitative drivers that can be used to understand, project and plan at each level *(e.g., business process)* for each parameter *(e.g., product)*. While multilevel analysis is not uniquely Bayesian, it does provide unique flexibility and control. 
+Bayesian analysis is a philosophy and methodology for modeling these complex, dynamic, ambiguous scenarios. Benefits of Bayesian analysis include:  
+
+* **Integration of Experience and Evidence** Often a model requires information that doesn't yet exist *(e.g., new products/markets)*. Additionally, expert opinion will bring more relevance and depth of understanding to a model that data have not comprehended. Experience and evidence can be integrated into probabilistic models that quntify reliablity and evolve with operation. 
+
+* **Explanatory Parameters** Bayesian models produce *effect* parameters with probabilities that can be used to assess causality and reliability, and build projections and evaluate scenarios or interventions.
+
+* **Multilevel Analysis with Effects** Business value-chains and transaction environments are almost always multilevel. These effects can be used to understand, project and plan at each level *(from units to  processes)* for each parameter *(e.g., product)*. 
 
 * **Granular Control over Model Design and Tuning** Models can also be tuned *(and generalized)* down to specific levels and parameters. 
 
-* **Bayesian Updating**. Bayesian models have a unique structure that can **quickly** integrate new data. This makes a huge difference in adjusting models to business dynamics. This architecture also provides for transfer of parameters between models *(circumventing retraining)*. This **agility** aligns well with high volume, dynamic transaction environments.
+* **Bayesian Updating**. Bayesian models have a unique structure that can **quickly** integrate new data. This makes a huge difference in adjusting models to business dynamics. 
 
 ----
 
