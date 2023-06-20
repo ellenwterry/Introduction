@@ -1,19 +1,18 @@
-### Bayesian Analysis for Forecasting and Planning
-
+### Bayesian Probability and Analysis
 ------
 
 These repositories support the **Bayesian Analysis for Forecasting, Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
 
 ------
 
-Enterprises operate in an economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, considering customer, competitor, supplier, product, and many other drivers *(drivers are variables that have a significant* **effect** *on the outcome of an enterprise - i.e., they* **cause** *change in enterprise activity and performance)*. 
+Enterprises operate in an economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, considering customer, competitor, supplier, product, and many other drivers *(**drivers** are variables that have a significant* **effect** *on the outcome of an enterprise and* **cause** *change in enterprise activity and performance)*. 
 
 
-Data environments range from structured and consistent databases, to unstructured and ambiguous data lakes to expert opinion.  Regardless of data quality, analysts must build models for understanding and decision-making that comprehends all the relevant variables and evaluates their relevance and reliablity.
+Data environments range from structured and consistent databases, to unstructured and ambiguous data lakes, to expert opinion.  Regardless of data quality, analysts must build models for understanding and decision-making that comprehend all the relevant variables and evaluate their relevance and reliablity.
 
-Bayesian analysis is a philosophy and methodology for modeling these complex, dynamic, ambiguous scenarios. Benefits of Bayesian analysis include:  
+Bayesian analysis is a philosophy and methodology for modeling these complex, dynamic, ambiguous scenarios. The Bayesian analyst tools include:  
 
-* **Integration of Experience and Evidence** Often a model requires information that doesn't yet exist *(e.g., new products/markets)*. Additionally, expert opinion will bring more relevance and depth of understanding to a model that data have not comprehended. Experience and evidence can be integrated into probabilistic models that quntify reliablity and evolve with operation. 
+* **Integration of Experience and Evidence** Often a model requires information that doesn't yet exist *(e.g., new products/markets)*. Additionally, expert opinion will bring a depth of understanding to models that data doesn't comprehend. Beliefs, Experience and evidence can be integrated into probabilistic models that quantify reliablity and evolve as data are created and collected. 
 
 * **Explanatory Parameters** Bayesian models produce *effect* parameters with probabilities that can be used to assess causality and reliability, and build projections and evaluate scenarios or interventions.
 
@@ -39,6 +38,6 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Ellen Terry
 
-Ellen Terry began her career in M&A analysis at Deloitte, developing econometric models for industry forecasting and valuation, later transitioning to Post Merger Integration *(PMI)*. She worked with Microsoft on a PMI project segment (enterprise application integration), fell in love with the company, and joined Microsoft to lead development of industry solutions *(cross platform templates)*, and  implementation, leveraging partner channels. Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP Data Science. She's currently a Professor of Practice at Bauer, and an independent consultant/mentor to planning and assurance groups.   
+Ellen Terry began her career in M&A analysis at Deloitte, developing econometric models for industry forecasting and valuation. She later worked for Microsoft, leading development of economic models and implementation solutions *(i.e., cross platform templates)*, while doing research work at the Santa Fe Institute. Post-Microsoft, she worked for GE as Director of Planning and Programs, and JP Morgan as VP - Data Science. She's currently a Professor of Practice at Bauer, and an independent consultant.  
 
 ------
