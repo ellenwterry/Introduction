@@ -1,4 +1,4 @@
-### Bayesian Analysis for Forecasting, Planning and Assurance
+### Bayesian Analysis for Forecasting and Planning
 
 ------
 
