@@ -1,7 +1,7 @@
 ### Bayesian Probability and Analysis
 ------
 
-These repositories support the **Bayesian Analysis for Forecasting, Planning and Assurance** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
+These repositories support the **Bayesian Probability and Analysis** course at the **Bauer Graduate Business School** and **HP Enterprise Data Science Institute**. 
 
 ------
 
