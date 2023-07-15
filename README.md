@@ -5,14 +5,14 @@ These repositories support the **Bayesian Probability and Analysis** course at t
 
 ------
 
-Enterprises operate in an economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, considering customer, competitor, supplier, product, and many other drivers *(**drivers** are variables that have a significant* **effect** *on the outcome of an enterprise and* **cause** *change in enterprise activity and performance)*. 
+Enterprises operate in an economy that is complex and dynamic. The scope of analyses can include processes throughout the value-chain, considering customer, competitor, supplier, product, and many other dimensions and drivers *(**drivers** are dimensnions that have a significant* **effect** *on the outcome of an enterprise, and* **cause** *change in enterprise activity and performance)*. 
 
 
-Data environments range from structured and consistent databases, to unstructured and ambiguous data lakes, to expert opinion.  Regardless of data quality, analysts must build models for understanding and decision-making that comprehend all the relevant variables and evaluate their relevance and reliablity.
+Data sources range from structured databases, to unstructured data stored in documents and data lakes, to expert opinions and human intuition. Regardless of data quality, analysts must build models for understanding and decision-making that comprehend all of these dimensions and evaluate the relevance, reliablity, and effect of each - and continue to do so as new data are added and insights are discovered.
 
-Bayesian analysis is both a philosophy and a methodology for modeling these complex, dynamic, ambiguous scenarios. The tools of a Bayesian Analyst include:  
+Bayesian analysis is both a philosophy and a methodology for modeling and understanding our complex, dynamic, ambiguous world. The tools of a Bayesian Analyst include:  
 
-* **Integration of Opinions, Experience and Evidence** Often a model requires information that doesn't yet exist *(e.g., new products/markets)*. Additionally, expert opinion brings a dimension to models that data often doesn't comprehend. Expert Opinions, Experience and Evidence can be integrated into probabilistic models that quantify the reliablity, and evolve as data are observed and collected. 
+* **Integration of Opinions, Experience and Evidence** Often a model requires information that doesn't yet exist *(e.g., new products/markets)*. Additionally, expert opinion brings a dimension to models that data often doesn't comprehend - often less reliable, but more relevant. Beliefs, Experience and Evidence can be integrated into probabilistic models that quantify this relevanc and reliablity, and evolve as data are observed and collected. 
 
 * **Explanatory Parameters** Bayesian models produce *effect* parameters with probabilities that can be used to assess causality and reliability, and build projections and evaluate scenarios or interventions. A major weakness with maching learning and AI applications.
 
