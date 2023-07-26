@@ -36,6 +36,6 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Terry
 
-Ellen Terry began her career in M&A analysis at **Deloitte**, focusing on forecasting and valuation modeling. She later joined **Microsoft**, leading development of industry models and solutions *(i.e., cross platform templates)* - she was also involved in research work at the **Santa Fe Institute**. Post-Microsoft, she joined **GE** as Director of Planning and Programs, and **JP Morgan** as VP - Data Science. She's currently a Professor at Bauer and an independent consultant, as well as a jazz musician *( [ellynsong](https://www.ellynsong.com) )*. 
+Ellen Terry began her career in M&A analysis at **Deloitte**, focusing on forecasting and valuation modeling. She later joined **Microsoft**, leading development of industry models and solutions *(i.e., cross platform templates)* - she was also involved in research work at the **Santa Fe Institute**. Post-Microsoft, she joined **GE** as Director of Planning and Programs, and later, **JP Morgan** as VP - Data Science. She's currently a Professor at Bauer and an independent consultant. She is also a jazz musician *( [ellynsong](https://www.ellynsong.com) )*. 
 
 ------
