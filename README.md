@@ -5,12 +5,12 @@ These repositories support the **Bayesian Probability, Analysis and Causality** 
 
 ------
 
-Enterprises operate in an economy that is complex and dynamic. The scope of analyses includes processes throughout the value-chain, considering customer, competitor, supplier, product, and many other dimensions and drivers *(**drivers** being dimensnions that have a significant* **effect** *on the enterprise - i.e., they* **cause** *changes in operational outcome)*. 
+Enterprises operate in an economy that is complex and dynamic. The scope of analyses includes processes throughout the value-chain, considering customer, competitor, supplier, product, and many other dimensions and drivers *(**drivers** being dimensnions that have a significant* **effect** *and possibly* **cause** *changes in operational outcome)*. 
 
 
-Data sources range from structured transactions and databases, to unstructured data stored in documents, to expert opinion and intuition. Regardless of data quality, analysts must build models that consider the relevant dimensions and evaluate the reliablity, and effect of each - continuing as new data are discovered. Bayesian analysis is both a philosophy and a methodology for building models that comprehend this data. The tools of a Bayesian Analyst include:  
+Data sources range from structured transactions and databases, to data stored in documents and audio/video files, to the opinions and intuition of experienced experts. Regardless of data source and quality, analysts must build models that integrate relevant dimensions and evaluate their effect and reliablity. Bayesian analysis is both a philosophy and a methodology for building models that comprehend all this data, updating as new data is created. The tools of a Bayesian Analyst include:  
 
-* **Integration of Opinions, Experience and Evidence** Often a model requires information that is not well defined, or doesn't yet exist *(e.g., new products/markets)*. Expert opinion brings a dimension to models that data often doesn't comprehend - maybe less reliable, but more relevant. Beliefs, experience, evidence... can be integrated into probabilistic models that *quantify relevance and reliablity*, and evolve as new data are observed and integrated. 
+* **Integration of Opinions, Experience and Evidence** Often a model requires information that is not well defined, or doesn't yet exist *(e.g., new products/markets)*. Expert opinion brings a dimension to models that data often doesn't comprehend - it maybe less reliable, but more relevant. Beliefs, experience, evidence... can be integrated into probabilistic models that *quantify relevance and reliablity*, and evolve as new data are observed and integrated. 
 
 * **Explanatory Parameters** Bayesian models produce *effect* parameters with probabilities that can be used to assess causality and reliability, and build projections and evaluate scenarios or interventions. A major weakness with maching learning and AI applications *(which are great at building models that produce accurate predictions, but not the causes)*
 
@@ -36,6 +36,6 @@ Site Repositories *(recommend cloning as the content is frequently updated)*:
 
 About Professor Terry
 
-Ellen Terry began her career in M&A analysis at **Deloitte**, focusing on forecasting and valuation modeling. She later joined **Microsoft**, leading development of industry models and solutions *(i.e., cross platform templates)* - she was also involved in research work at the **Santa Fe Institute**. Post-Microsoft, she joined **GE** as Director of Planning and Programs, and later, **JP Morgan** as VP - Data Science. She's currently a Professor at Bauer and an independent consultant. She is also a jazz musician *( [ellynsong](https://www.ellynsong.com) )*. 
+Ellen Terry began her career in M&A analysis at **Deloitte**, focusing on forecasting and valuation modeling. She later joined **Microsoft**, leading development of industry models and solutions *(i.e., cross platform templates)*, where she was also involved in research work at the **Santa Fe Institute**. Post-Microsoft, she joined **GE** as Director of Planning and Programs, and later, **JP Morgan** as VP - Data Science. She's currently a Professor at Bauer and an independent consultant. She is also a jazz musician *( [ellynsong](https://www.ellynsong.com) )*. 
 
 ------
